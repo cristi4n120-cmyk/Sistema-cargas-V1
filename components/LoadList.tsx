@@ -1,4 +1,3 @@
-
 import React, { useState, useMemo, useEffect } from 'react';
 import * as ReactRouterDOM from 'react-router-dom';
 const { useNavigate, useLocation } = ReactRouterDOM;
@@ -393,7 +392,7 @@ const LoadList: React.FC = () => {
       {/* DELETE MODAL */}
       {isDeleteModalOpen && (
         <div className="fixed inset-0 bg-brand-navy/90 dark:bg-black/90 backdrop-blur-2xl flex items-center justify-center z-[120] p-6 animate-in fade-in duration-300">
-          <div className="bg-white dark:bg-[#1e293b] w-full max-w-sm rounded-[3.5rem] shadow-gesla-hard border border-slate-200 dark:border-white/10 p-12 text-center animate-in zoom-in duration-300 relative overflow-hidden">
+          <div className="bg-white dark:bg-[#1e293b] w-full max-w-sm rounded-[3.5rem] shadow-premium border border-slate-200 dark:border-white/10 p-12 text-center animate-in zoom-in duration-300 relative overflow-hidden">
              {/* Background Noise */}
              <div className="absolute inset-0 opacity-[0.03] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] pointer-events-none"></div>
              

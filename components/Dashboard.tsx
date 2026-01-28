@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useEffect, useRef } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import * as ReactRouterDOM from 'react-router-dom';
 const { useNavigate } = ReactRouterDOM;
 import { 
@@ -9,7 +9,7 @@ import {
   Activity, TrendingUp, TrendingDown, Truck, 
   DollarSign, AlertTriangle, CheckCircle2, BarChart3, 
   Package, ShieldCheck, Clock, Wallet, Coins,
-  Target, Zap, Radar, ArrowUpRight
+  Target, Radar, ArrowUpRight
 } from 'lucide-react';
 import { loadService } from '../services/loadService';
 import { userService } from '../services/userService';

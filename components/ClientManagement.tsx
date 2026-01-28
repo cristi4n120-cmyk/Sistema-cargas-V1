@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useMemo } from 'react';
 import { 
   Plus, Search, Phone, Mail, User, Trash2, Edit3, X, 
@@ -651,7 +650,7 @@ const ClientManagement: React.FC = () => {
       {/* DELETE MODAL */}
       {isDeleteModalOpen && clientToDelete && (
         <div className="fixed inset-0 bg-brand-navy/98 dark:bg-black/90 backdrop-blur-3xl flex items-center justify-center z-[120] p-6 animate-in fade-in duration-300">
-          <div className="bg-white dark:bg-[#1e293b] w-full max-w-sm rounded-[4rem] shadow-gesla-hard overflow-hidden animate-in zoom-in duration-500 border border-white/20 relative">
+          <div className="bg-white dark:bg-[#1e293b] w-full max-w-sm rounded-[4rem] shadow-premium overflow-hidden animate-in zoom-in duration-500 border border-white/20 relative">
             <button onClick={() => setIsDeleteModalOpen(false)} className="absolute top-6 right-6 p-3 text-slate-300 hover:text-brand-navy dark:hover:text-white rounded-full hover:bg-slate-50 dark:hover:bg-white/10 transition-all btn-press"><X size={20} /></button>
             <div className="p-12 text-center pb-6">
                <div className="w-24 h-24 bg-brand-red/10 rounded-[2.5rem] flex items-center justify-center text-brand-red mx-auto mb-8 shadow-glow-red border border-brand-red/10 relative group">
