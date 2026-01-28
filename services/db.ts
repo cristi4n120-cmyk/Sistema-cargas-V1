@@ -27,7 +27,7 @@ const daysAgo = (days: number) => {
 // Dados Iniciais (Seed)
 const SEED_DATA = {
   SETTINGS: {
-    companyName: 'Gesla Isolamentos',
+    companyName: 'LogiControl',
     companyCnpj: '35.691.397/0001-90',
     portCodePrefix: 'GSL',
     defaultShippingType: ShippingType.FOB,
@@ -45,7 +45,7 @@ const SEED_DATA = {
     },
     erpWebhookUrl: '', // Mantido para retrocompatibilidade
     apiKey: 'ak_live_987654321', // Mantido para retrocompatibilidade
-    notificationEmail: 'logistica@geslaisolamentos.com',
+    notificationEmail: 'logistica@logicontrol.com',
     darkMode: false,
     requirePaymentProof: true,
     requireDifalGuide: true,
@@ -115,7 +115,7 @@ const SEED_DATA = {
   },
   USERS: [
     { 
-        id: '1', name: 'Adrian Oliveira', email: 'logistica@geslaisolamentos.com', role: UserRole.ADMIN, 
+        id: '1', name: 'Adrian Oliveira', email: 'logistica@logicontrol.com', role: UserRole.ADMIN, 
         password: 'admin', username: 'adrian', department: 'Gerência de Logística', lastActivity: 'Agora'
     }
   ],

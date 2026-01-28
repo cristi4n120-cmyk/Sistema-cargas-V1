@@ -293,7 +293,7 @@ const Settings: React.FC = () => {
           <button 
             onClick={handleSave}
             disabled={isSaving}
-            className="flex-1 lg:flex-none bg-brand-navy dark:bg-white dark:text-brand-navy text-white px-10 py-4 rounded-[1.5rem] text-[9px] font-black uppercase tracking-[0.2em] shadow-gesla-hard hover:bg-brand-accent dark:hover:bg-brand-accent dark:hover:text-white hover:translate-y-[-2px] transition-all flex items-center justify-center gap-3 btn-press group overflow-hidden relative"
+            className="flex-1 lg:flex-none bg-brand-navy dark:bg-white dark:text-brand-navy text-white px-10 py-4 rounded-[1.5rem] text-[9px] font-black uppercase tracking-[0.2em] shadow-premium hover:bg-brand-accent dark:hover:bg-brand-accent dark:hover:text-white hover:translate-y-[-2px] transition-all flex items-center justify-center gap-3 btn-press group overflow-hidden relative"
           >
             {isSaving && <div className="absolute inset-0 btn-shimmer"></div>}
             <div className={`flex items-center gap-3 transition-transform duration-300 ${isSaving ? 'scale-90 opacity-80' : 'scale-100'}`}>
@@ -773,7 +773,7 @@ const Settings: React.FC = () => {
         <div className="xl:col-span-4 space-y-8 h-fit sticky top-28 animate-entry delay-3">
           
           {/* SYSTEM MANA (HEALTH) */}
-          <div className="bg-brand-navy dark:bg-black/40 p-8 rounded-[3rem] shadow-gesla-hard text-white relative overflow-hidden group border border-white/5 hover:shadow-glow-accent transition-shadow duration-500">
+          <div className="bg-brand-navy dark:bg-black/40 p-8 rounded-[3rem] shadow-premium text-white relative overflow-hidden group border border-white/5 hover:shadow-glow-accent transition-shadow duration-500">
             <div className="absolute top-0 right-0 w-48 h-48 bg-brand-accent/20 blur-[80px] -mr-24 -mt-24 group-hover:scale-150 transition-transform duration-[3000ms]"></div>
             
             <div className="relative z-10">
@@ -852,7 +852,7 @@ const Settings: React.FC = () => {
 
       {/* SUCCESS TOAST - MAGIC RUNE STYLE (ELASTIC POP) */}
       {showSuccess && (
-        <div className="fixed bottom-12 left-1/2 -translate-x-1/2 bg-brand-navy dark:bg-white text-white dark:text-brand-navy px-12 py-6 rounded-[3rem] shadow-gesla-hard flex items-center gap-6 z-[200] border border-white/10 animate-in slide-in-from-bottom-8 zoom-in-95 duration-500 cubic-bezier(0.175, 0.885, 0.32, 1.275)">
+        <div className="fixed bottom-12 left-1/2 -translate-x-1/2 bg-brand-navy dark:bg-white text-white dark:text-brand-navy px-12 py-6 rounded-[3rem] shadow-premium flex items-center gap-6 z-[200] border border-white/10 animate-in slide-in-from-bottom-8 zoom-in-95 duration-500 cubic-bezier(0.175, 0.885, 0.32, 1.275)">
           <div className="w-12 h-12 bg-emerald-500 rounded-full flex items-center justify-center text-white shadow-lg shadow-emerald-500/30 animate-pulse">
              <CheckCircle2 size={24} />
           </div>

@@ -77,7 +77,7 @@ const Logo: React.FC<LogoProps> = ({ className = '', size = 180, white = false, 
                 animation: floatHat 6s ease-in-out infinite;
                 transform-origin: center;
               }
-              .gesla-text {
+              .logic-text {
                 font-family: 'Plus Jakarta Sans', sans-serif;
                 font-weight: 900;
                 font-size: 52px;
@@ -170,7 +170,7 @@ const Logo: React.FC<LogoProps> = ({ className = '', size = 180, white = false, 
         {/* --- TEXT MARK (Full Variant) --- */}
         {!isIcon && (
           <>
-            <text x="110" y="65" className="gesla-text">LOGIC</text>
+            <text x="110" y="65" className="logic-text">LOGIC</text>
             {/* Decorative Dot */}
             <circle cx="285" cy="52" r="3.5" fill="var(--color-accent)" className="animate-pulse" />
           </>

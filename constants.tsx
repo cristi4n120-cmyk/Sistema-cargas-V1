@@ -91,7 +91,7 @@ export const NAVIGATION_GROUPS: NavGroup[] = [
   {
     label: 'Administração',
     items: [
-      { name: 'Equipe Gesla', path: '/users', icon: <Users size={20} /> },
+      { name: 'Equipe LogiControl', path: '/users', icon: <Users size={20} /> },
       { name: 'Configurações', path: '/settings', icon: <Settings size={20} /> },
     ]
   }

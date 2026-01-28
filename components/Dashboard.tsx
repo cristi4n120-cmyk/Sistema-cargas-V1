@@ -1,3 +1,4 @@
+
 import React, { useMemo, useState, useEffect, useRef } from 'react';
 import * as ReactRouterDOM from 'react-router-dom';
 const { useNavigate } = ReactRouterDOM;
@@ -278,7 +279,7 @@ const Dashboard: React.FC = () => {
       carrierPerformance: carrierRanking,
       financialTrend: financialTrendChart,
       cifFobAnalysis: [
-        { name: 'CIF (Gesla)', value: cifLoads.length, revenue: cifRevenue, fill: '#7c3aed', type: ShippingType.CIF },
+        { name: 'CIF (LogiControl)', value: cifLoads.length, revenue: cifRevenue, fill: '#7c3aed', type: ShippingType.CIF },
         { name: 'FOB (Cliente)', value: fobLoads.length, revenue: 0, fill: '#06b6d4', type: ShippingType.FOB }
       ],
       alerts: { fiscal: pendingDocs.length, highValue: highValueLoads.length }

@@ -393,7 +393,7 @@ const CarrierManagement: React.FC = () => {
                {/* ACTION BAR */}
                <div className="flex justify-end pt-4">
                   {isAdmin && (
-                    <button type="submit" className="bg-brand-navy dark:bg-white dark:text-brand-navy text-white px-12 py-5 rounded-[2rem] font-black uppercase text-[10px] tracking-[0.2em] shadow-gesla-hard hover:scale-105 hover:bg-brand-accent dark:hover:bg-brand-accent dark:hover:text-white transition-all flex items-center gap-4 group btn-press">
+                    <button type="submit" className="bg-brand-navy dark:bg-white dark:text-brand-navy text-white px-12 py-5 rounded-[2rem] font-black uppercase text-[10px] tracking-[0.2em] shadow-premium hover:scale-105 hover:bg-brand-accent dark:hover:bg-brand-accent dark:hover:text-white transition-all flex items-center gap-4 group btn-press">
                        <Save size={20} className="group-hover:animate-bounce" /> 
                        {selectedCarrier ? 'Atualizar Dossiê' : 'Homologar Parceiro'}
                     </button>
