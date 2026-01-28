@@ -282,7 +282,7 @@ const UserManagement: React.FC = () => {
              <div className="p-2 bg-brand-navy/5 dark:bg-white/10 rounded-xl text-brand-navy dark:text-slate-400 shadow-sm group-hover:rotate-12 transition-transform duration-500">
                 <Users size={18} />
              </div>
-             <span className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-[0.4em]">LogiControl Personnel</span>
+             <span className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-[0.4em]">LogiControl Personnel Command</span>
           </div>
           <h2 className="text-5xl font-black text-brand-navy dark:text-white tracking-tighter uppercase leading-none">
             Time de <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-accent to-purple-600 animate-pulse-slow">Elite</span>

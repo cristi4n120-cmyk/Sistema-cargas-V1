@@ -613,7 +613,7 @@ const CarrierManagement: React.FC = () => {
              <div className="p-2 bg-brand-navy/5 dark:bg-white/10 rounded-xl text-brand-navy dark:text-slate-400 shadow-sm">
                 {mode === 'grid' ? <Truck size={18} /> : <Anchor size={18} />}
              </div>
-             <span className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-[0.4em]">LogiControl Fleet</span>
+             <span className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-[0.4em]">LogiControl Fleet Command</span>
           </div>
           <h2 className="text-5xl font-black text-brand-navy dark:text-white tracking-tighter uppercase leading-none">
             {mode === 'grid' ? 'Rede de ' : selectedCarrier ? selectedCarrier.name : 'Nova '}
