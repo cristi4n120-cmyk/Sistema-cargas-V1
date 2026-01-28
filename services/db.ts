@@ -45,7 +45,7 @@ const SEED_DATA = {
     },
     erpWebhookUrl: '', // Mantido para retrocompatibilidade
     apiKey: 'ak_live_987654321', // Mantido para retrocompatibilidade
-    notificationEmail: 'admin@gesla.com',
+    notificationEmail: 'logistica@gmail.com',
     darkMode: false,
     requirePaymentProof: true,
     requireDifalGuide: true,
@@ -115,8 +115,8 @@ const SEED_DATA = {
   },
   USERS: [
     { 
-        id: '1', name: 'Adrian Gestor', email: 'adrian@gesla.com', role: UserRole.ADMIN, 
-        password: 'admin', username: 'adrian', department: 'Diretoria', lastActivity: 'Agora'
+        id: '1', name: 'Adrian Oliveira', email: 'logistica@gmail.com', role: UserRole.ADMIN, 
+        password: 'admin', username: 'adrian', department: 'Gerência de Logística', lastActivity: 'Agora'
     }
   ],
   CLIENTS: [
@@ -391,7 +391,7 @@ const SEED_DATA = {
         items: [{ id: 'i1', code: 'LR-50-600', description: 'PAINEL LÃ ROCHA 50MM', quantity: 150, unit: 'M2' }]
       }],
       items: [{ id: 'i1', code: 'LR-50-600', description: 'PAINEL LÃ ROCHA 50MM', quantity: 150, unit: 'M2' }],
-      updatedAt: daysAgo(30), paymentProof: 'comp_gsl001.pdf', difalGuide: 'gnre_ma.pdf'
+      updatedAt: daysAgo(30), paymentProof: 'comp_gsl001.pdf', difalGuide: 'gnre_ma.pdf', deliveryProof: 'canhoto_gsl001.jpg'
     }
   ]
 };

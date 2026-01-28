@@ -39,10 +39,23 @@ export const loadService = {
     const loads = loadService.getLoads();
   },
 
-  downloadAttachment: async (filename: string, type: 'DIFAL' | 'COMPROVANTE', loadCode?: string) => {
+  downloadAttachment: async (filename: string, type: 'DIFAL' | 'COMPROVANTE' | 'POD', loadCode?: string) => {
     const doc = new jsPDF();
-    doc.text(`Arquivo: ${filename}`, 10, 10);
-    doc.save(filename);
+    
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(16);
+    doc.text(`ANEXO DIGITAL: ${type}`, 10, 20);
+    
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(10);
+    doc.text(`Arquivo Original: ${filename}`, 10, 30);
+    if (loadCode) doc.text(`Referência Carga: ${loadCode}`, 10, 36);
+    
+    doc.setDrawColor(200);
+    doc.rect(10, 45, 190, 240); // Placeholder box
+    doc.text('[ VISUALIZAÇÃO DO ARQUIVO SIMULADA ]', 105, 160, { align: 'center' });
+    
+    doc.save(`${type}_${filename}`);
   },
 
   downloadManifest: async (load: Load) => {

@@ -265,6 +265,7 @@ export interface Load {
   updatedAt: string;
   paymentProof?: string;
   difalGuide?: string;
+  deliveryProof?: string; // Canhoto / POD (Proof of Delivery)
 }
 
 export interface SystemSettings {

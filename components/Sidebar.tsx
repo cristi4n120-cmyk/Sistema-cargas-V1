@@ -109,7 +109,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
                 </h1>
                 <div className="flex items-center gap-2 mt-1">
                   <span className="h-px w-0 group-hover/logo:w-6 transition-all duration-500 bg-gradient-to-r from-brand-accent to-transparent"></span>
-                  <span className="text-[9px] font-bold text-slate-400 uppercase tracking-[0.3em] font-data group-hover/logo:text-white transition-colors delay-75">LogiControl</span>
+                  <span className="text-[9px] font-bold text-slate-400 uppercase tracking-[0.3em] font-data group-hover/logo:text-white transition-colors delay-75">LogiControl Pro</span>
                 </div>
               </div>
             </div>

@@ -1,4 +1,3 @@
-
 import React, { useMemo, useState, useEffect, useRef } from 'react';
 import * as ReactRouterDOM from 'react-router-dom';
 const { useNavigate } = ReactRouterDOM;
@@ -410,7 +409,7 @@ const Dashboard: React.FC = () => {
                 
                 <div className="h-[350px] relative z-10">
                   <ResponsiveContainer width="100%" height="100%">
-                    <BarChart data={statusDistribution} barSize={60} onClick={(data) => { if (data && data.activePayload && data.activePayload[0]) handleNavigate('status', data.activePayload[0].payload.statusKey, `Status: ${data.activePayload[0].payload.name}`); }}>
+                    <BarChart data={statusDistribution} barSize={60} onClick={(data: any) => { if (data && data.activePayload && data.activePayload[0]) handleNavigate('status', data.activePayload[0].payload.statusKey, `Status: ${data.activePayload[0].payload.name}`); }}>
                       <defs>
                         {statusDistribution.map((entry, index) => (
                           <linearGradient key={`grad-${index}`} id={`grad-${index}`} x1="0" y1="0" x2="0" y2="1">

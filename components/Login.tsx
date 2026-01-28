@@ -55,7 +55,7 @@ const Login: React.FC = () => {
 
   // Textos animados
   const titleText = useScrambleText("GESLA OS", mounted);
-  const subtitleText = useScrambleText("SECURE ACCESS PROTOCOL", mounted);
+  const subtitleText = useScrambleText("LOGICONTROL PRO ACCESS", mounted);
 
   useEffect(() => {
     setMounted(true);
@@ -412,7 +412,7 @@ const Login: React.FC = () => {
            <div className="flex items-center gap-3">
               <Cpu size={14} className="text-slate-500" />
               <div className="h-px w-10 bg-white/10"></div>
-              <span className="text-[9px] font-black text-slate-400 uppercase tracking-[0.2em]">Gesla v2.6</span>
+              <span className="text-[9px] font-black text-slate-400 uppercase tracking-[0.2em]">LogiControl Pro v2.6</span>
            </div>
         </div>
 

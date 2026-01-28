@@ -5,7 +5,7 @@ const { useNavigate } = ReactRouterDOM;
 import { 
   Search, Archive, Calendar, MapPin, 
   RefreshCcw, Ban, TrendingUp, TrendingDown,
-  CheckCircle2, AlertTriangle, Package, History
+  CheckCircle2, AlertTriangle, Package, History, FileSignature
 } from 'lucide-react';
 import { loadService } from '../services/loadService';
 import { Load, LoadStatus } from '../types';
@@ -116,6 +116,7 @@ const LoadArchive: React.FC = () => {
             const { profit, margin, slaStatus } = getLoadMetrics(load);
             const isCancelled = load.status === LoadStatus.CANCELLED;
             const completionDate = load.actualDeliveryDate || load.updatedAt || load.date;
+            const hasPOD = !!load.deliveryProof;
 
             return (
               <div 
@@ -196,11 +197,17 @@ const LoadArchive: React.FC = () => {
                                   <span className="text-xs font-black font-data">{formatCurrency(profit)}</span>
                                </div>
                             </div>
-                            <div className="text-right">
-                               <span className="text-[8px] font-black text-slate-400 uppercase block mb-0.5">Margem</span>
-                               <span className={`text-xs font-black font-data ${margin > 15 ? 'text-emerald-500' : 'text-amber-500'}`}>
-                                  {formatDecimal(margin)}%
-                               </span>
+                            <div className="text-right flex flex-col items-end">
+                               {/* POD INDICATOR */}
+                               {hasPOD ? (
+                                  <div className="flex items-center gap-1 text-[8px] font-black text-emerald-500 uppercase bg-emerald-50 dark:bg-emerald-500/10 px-1.5 py-0.5 rounded" title="Canhoto Digitalizado">
+                                     <FileSignature size={10} /> POD OK
+                                  </div>
+                               ) : (
+                                  <div className="flex items-center gap-1 text-[8px] font-black text-amber-500 uppercase bg-amber-50 dark:bg-amber-500/10 px-1.5 py-0.5 rounded animate-pulse" title="Pendente Comprovante">
+                                     <AlertTriangle size={10} /> S/ POD
+                                  </div>
+                               )}
                             </div>
                          </div>
                        ) : (

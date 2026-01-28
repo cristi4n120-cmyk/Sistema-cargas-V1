@@ -8,7 +8,7 @@ import {
   Search, DollarSign, Scale, Calendar, 
   Briefcase, Building2, Receipt, Percent, TrendingUp, TrendingDown,
   Wallet, Lock, History, AlertTriangle, ToggleLeft, ToggleRight, ShieldAlert,
-  CheckCircle2, Box, ChevronUp, ChevronDown, GripVertical
+  CheckCircle2, Box, ChevronUp, ChevronDown, GripVertical, FileSignature
 } from 'lucide-react';
 import { 
   Load, LoadItem, ShippingType, ClientType, MovementType, 
@@ -40,7 +40,7 @@ const TacticalInput = ({ label, icon: Icon, value, onChange, type = "text", plac
       <div className={`
         relative flex items-center bg-white dark:bg-[#020617] rounded-2xl overflow-hidden border transition-all duration-300
         ${isFocused 
-          ? 'border-brand-accent shadow-[0_0_20px_rgba(var(--color-brand-accent),0.15)] ring-1 ring-brand-accent/20' 
+          ? 'border-brand-accent shadow-[0_0_20px_rgba(var(--color-brand-accent),0.15)]' 
           : 'border-slate-200 dark:border-white/10 hover:border-slate-300 dark:hover:border-white/20'
         }
       `}>
@@ -109,6 +109,7 @@ const LoadForm: React.FC = () => {
   const carrierRef = useRef<HTMLDivElement>(null);
   const difalInputRef = useRef<HTMLInputElement>(null);
   const paymentInputRef = useRef<HTMLInputElement>(null);
+  const deliveryProofInputRef = useRef<HTMLInputElement>(null); // New POD Ref
   const itemSearchRef = useRef<HTMLDivElement>(null);
 
   // --- STATE INICIALIZADO ---
@@ -511,7 +512,7 @@ const LoadForm: React.FC = () => {
                                 </div>
                                 <div className="col-span-12 md:col-span-8">
                                   <button type="button" onClick={() => handleAddItem(delivery.id)} className="flex items-center justify-center gap-2 text-[9px] font-black text-brand-accent bg-brand-accent/5 border border-brand-accent/20 px-4 py-3.5 rounded-2xl w-full hover:bg-brand-accent hover:text-white uppercase transition-all shadow-sm group/btn">
-                                    <Plus size={14} className="group-hover/btn:rotate-90 transition-transform" /> Adicionar Item ao Manifesto
+                                    <Plus size={14} className="group-hover:btn:rotate-90 transition-transform" /> Adicionar Item ao Manifesto
                                   </button>
                                 </div>
                              </div>
@@ -738,7 +739,7 @@ const LoadForm: React.FC = () => {
                   {/* UPLOADS & COMPLIANCE */}
                   <div className="pt-8 border-t border-slate-100 dark:border-white/5 space-y-6">
                      <div className="flex items-center justify-between">
-                        <h4 className="text-[9px] font-black text-slate-400 uppercase tracking-widest flex items-center gap-2"><FileCheck size={14} /> Compliance & Docs</h4>
+                        <h4 className="text-[9px] font-black text-slate-400 uppercase tracking-widest flex items-center gap-2"><FileCheck size={14} /> Compliance & Auditoria</h4>
                         
                         {/* TOGGLE DIFAL MANUAL */}
                         <div 
@@ -764,6 +765,7 @@ const LoadForm: React.FC = () => {
                      )}
 
                      <div className="flex flex-col md:flex-row gap-6">
+                        {/* GNRE UPLOAD */}
                         <button type="button" onClick={() => difalInputRef.current?.click()} className={`flex-1 p-6 rounded-[2rem] border-2 border-dashed flex flex-col items-center justify-center gap-3 transition-all group hover:-translate-y-1 ${formData.difalGuide ? 'border-emerald-500 bg-emerald-50/50' : 'border-slate-200 dark:border-white/10 text-slate-400 hover:border-brand-accent hover:text-brand-accent'}`}>
                            <div className={`w-12 h-12 rounded-full flex items-center justify-center transition-colors ${formData.difalGuide ? 'bg-emerald-100 text-emerald-600' : 'bg-slate-100 dark:bg-white/5 group-hover:bg-brand-accent/10'}`}>
                               {formData.difalGuide ? <CheckCircle2 size={24} /> : <Upload size={24} />}
@@ -772,12 +774,22 @@ const LoadForm: React.FC = () => {
                            <input type="file" ref={difalInputRef} className="hidden" accept=".pdf" onChange={(e) => e.target.files?.[0] && setFormData(p => ({...p, difalGuide: e.target.files![0].name}))} />
                         </button>
                         
+                        {/* COMPROVANTE PAGAMENTO */}
                         <button type="button" onClick={() => paymentInputRef.current?.click()} className={`flex-1 p-6 rounded-[2rem] border-2 border-dashed flex flex-col items-center justify-center gap-3 transition-all group hover:-translate-y-1 ${formData.paymentProof ? 'border-emerald-500 bg-emerald-50/50' : 'border-slate-200 dark:border-white/10 text-slate-400 hover:border-brand-accent hover:text-brand-accent'}`}>
                            <div className={`w-12 h-12 rounded-full flex items-center justify-center transition-colors ${formData.paymentProof ? 'bg-emerald-100 text-emerald-600' : 'bg-slate-100 dark:bg-white/5 group-hover:bg-brand-accent/10'}`}>
                               {formData.paymentProof ? <CheckCircle2 size={24} /> : <Upload size={24} />}
                            </div>
                            <span className="text-[9px] font-black uppercase tracking-widest">{formData.paymentProof || 'Upload Comprovante'}</span>
                            <input type="file" ref={paymentInputRef} className="hidden" accept=".pdf" onChange={(e) => e.target.files?.[0] && setFormData(p => ({...p, paymentProof: e.target.files![0].name}))} />
+                        </button>
+
+                        {/* CANHOTO POD (NOVO) */}
+                        <button type="button" onClick={() => deliveryProofInputRef.current?.click()} className={`flex-1 p-6 rounded-[2rem] border-2 border-dashed flex flex-col items-center justify-center gap-3 transition-all group hover:-translate-y-1 ${formData.deliveryProof ? 'border-emerald-500 bg-emerald-50/50' : 'border-slate-200 dark:border-white/10 text-slate-400 hover:border-brand-accent hover:text-brand-accent'}`}>
+                           <div className={`w-12 h-12 rounded-full flex items-center justify-center transition-colors ${formData.deliveryProof ? 'bg-emerald-100 text-emerald-600' : 'bg-slate-100 dark:bg-white/5 group-hover:bg-brand-accent/10'}`}>
+                              {formData.deliveryProof ? <FileSignature size={24} /> : <Upload size={24} />}
+                           </div>
+                           <span className="text-[9px] font-black uppercase tracking-widest">{formData.deliveryProof || 'Upload Canhoto (POD)'}</span>
+                           <input type="file" ref={deliveryProofInputRef} className="hidden" accept=".pdf,.jpg,.png" onChange={(e) => e.target.files?.[0] && setFormData(p => ({...p, deliveryProof: e.target.files![0].name}))} />
                         </button>
                      </div>
                   </div>
