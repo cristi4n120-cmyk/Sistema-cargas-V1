@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useMemo, useRef } from 'react';
 import * as ReactRouterDOM from 'react-router-dom';
 const { useNavigate, useParams } = ReactRouterDOM;
@@ -800,7 +799,7 @@ const LoadForm: React.FC = () => {
 
         {/* SIDEBAR SUMMARY - ALWAYS VISIBLE */}
         <div className="xl:col-span-4 h-fit sticky top-24 space-y-6 animate-fade-in delay-200">
-           <div className={`p-8 rounded-[3rem] text-white shadow-gesla-hard relative overflow-hidden group transition-all duration-500 ${isArchived ? 'bg-slate-900 border border-slate-700' : 'bg-brand-navy dark:bg-[#0f172a] border border-white/5'}`}>
+           <div className={`p-8 rounded-[3rem] text-white shadow-premium relative overflow-hidden group transition-all duration-500 ${isArchived ? 'bg-slate-900 border border-slate-700' : 'bg-brand-navy dark:bg-[#0f172a] border border-white/5'}`}>
               <div className="absolute top-0 right-0 w-40 h-40 bg-brand-accent/20 rounded-full -mr-20 -mt-20 blur-3xl group-hover:scale-150 transition-transform duration-[2000ms]"></div>
               
               <div className="relative z-10">

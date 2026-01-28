@@ -442,7 +442,7 @@ const UserManagement: React.FC = () => {
         <div className="xl:col-span-4 space-y-8 h-fit sticky top-28 animate-in slide-in-from-right-8 fade-in duration-700">
           
           {/* AUTHORITY MATRIX */}
-          <div className="bg-brand-navy dark:bg-[#0f172a] p-8 rounded-[3rem] shadow-gesla-hard dark:shadow-none border border-white/5 text-white relative overflow-hidden group">
+          <div className="bg-brand-navy dark:bg-[#0f172a] p-8 rounded-[3rem] shadow-premium dark:shadow-none border border-white/5 text-white relative overflow-hidden group">
             <div className="absolute top-0 right-0 w-48 h-48 bg-brand-accent/10 rounded-full -mr-24 -mt-24 blur-[60px] group-hover:scale-150 transition-transform duration-[2000ms]"></div>
             
             <div className="relative z-10">
@@ -505,7 +505,7 @@ const UserManagement: React.FC = () => {
       {/* MODAL DE HOMOLOGAÇÃO ( IDENTITY & ACCESS PROTOCOL ) */}
       {isModalOpen && (
         <div className="fixed inset-0 bg-brand-navy/95 dark:bg-black/90 backdrop-blur-2xl flex items-center justify-center z-[100] p-6 animate-in fade-in duration-300">
-          <div className="bg-white dark:bg-[#1e293b] w-full max-w-4xl rounded-[4rem] shadow-gesla-hard border border-white/20 overflow-hidden animate-in zoom-in duration-500 flex flex-col max-h-[90vh]">
+          <div className="bg-white dark:bg-[#1e293b] w-full max-w-4xl rounded-[4rem] shadow-premium border border-white/20 overflow-hidden animate-in zoom-in duration-500 flex flex-col max-h-[90vh]">
             
             <div className="p-8 lg:p-10 pb-6 flex justify-between items-center bg-slate-50/50 dark:bg-[#020617]/50 border-b border-slate-100 dark:border-white/5">
               <div className="flex items-center gap-6">
@@ -625,7 +625,7 @@ const UserManagement: React.FC = () => {
                </button>
                <button 
                  onClick={handleSave} 
-                 className="flex-[2] bg-brand-navy dark:bg-white dark:text-brand-navy text-white py-5 rounded-[2rem] font-black shadow-gesla-hard hover:bg-brand-accent dark:hover:bg-brand-accent dark:hover:text-white transition-all uppercase text-[10px] tracking-[0.2em] flex items-center justify-center gap-4 group btn-press"
+                 className="flex-[2] bg-brand-navy dark:bg-white dark:text-brand-navy text-white py-5 rounded-[2rem] font-black shadow-premium hover:bg-brand-accent dark:hover:bg-brand-accent dark:hover:text-white transition-all uppercase text-[10px] tracking-[0.2em] flex items-center justify-center gap-4 group btn-press"
                >
                   <Save size={20} className="group-hover:animate-bounce" /> 
                   {editingUser ? 'Atualizar Dossiê' : 'Conceder Acesso'}
@@ -639,7 +639,7 @@ const UserManagement: React.FC = () => {
       {/* CONFIRM DELETE MODAL */}
       {isDeleteModalOpen && userToDelete && (
         <div className="fixed inset-0 bg-brand-navy/98 dark:bg-black/90 backdrop-blur-3xl flex items-center justify-center z-[120] p-6 animate-in fade-in duration-300">
-          <div className="bg-white dark:bg-[#1e293b] w-full max-w-sm rounded-[4rem] shadow-gesla-hard overflow-hidden animate-in zoom-in duration-500 border border-white/20">
+          <div className="bg-white dark:bg-[#1e293b] w-full max-w-sm rounded-[4rem] shadow-premium overflow-hidden animate-in zoom-in duration-500 border border-white/20">
             <div className="p-12 text-center">
                <div className="w-24 h-24 bg-brand-red/10 rounded-[2.5rem] flex items-center justify-center text-brand-red mx-auto mb-10 shadow-glow-red border border-brand-red/10">
                  <ShieldAlert size={48} className="animate-pulse" />

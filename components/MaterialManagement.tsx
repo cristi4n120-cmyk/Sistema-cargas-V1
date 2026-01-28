@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useMemo } from 'react';
 import { 
   Package, Plus, Search, Trash2, Edit3, X, Box, Layers, 
@@ -384,7 +383,7 @@ const MaterialManagement: React.FC = () => {
       {/* ASSET BLUEPRINT EDITOR (MODAL) */}
       {isModalOpen && (
         <div className="fixed inset-0 bg-brand-navy/95 dark:bg-black/95 backdrop-blur-2xl flex items-center justify-center z-[100] p-4 lg:p-8 animate-in fade-in duration-300">
-          <div className="bg-white dark:bg-[#1e293b] w-full max-w-5xl rounded-[4rem] shadow-gesla-hard border border-slate-200/50 dark:border-white/10 overflow-hidden animate-in zoom-in duration-500 flex flex-col max-h-full">
+          <div className="bg-white dark:bg-[#1e293b] w-full max-w-5xl rounded-[4rem] shadow-premium border border-slate-200/50 dark:border-white/10 overflow-hidden animate-in zoom-in duration-500 flex flex-col max-h-full">
             
             {/* Header */}
             <div className="p-8 lg:p-10 pb-6 flex justify-between items-center bg-slate-50/50 dark:bg-[#020617]/50 border-b border-slate-100 dark:border-white/5">
@@ -533,7 +532,7 @@ const MaterialManagement: React.FC = () => {
                <button type="button" onClick={() => setIsModalOpen(false)} className="flex-1 py-5 rounded-[2rem] font-black text-slate-400 hover:bg-white dark:hover:bg-white/5 transition-all uppercase text-[10px] tracking-widest btn-press">
                   Cancelar Operação
                </button>
-               <button onClick={handleSubmit} className="flex-[2] bg-brand-navy dark:bg-white dark:text-brand-navy text-white py-5 rounded-[2rem] font-black shadow-gesla-hard hover:bg-brand-accent dark:hover:bg-brand-accent dark:hover:text-white transition-all uppercase text-[10px] tracking-[0.2em] flex items-center justify-center gap-4 group btn-press">
+               <button onClick={handleSubmit} className="flex-[2] bg-brand-navy dark:bg-white dark:text-brand-navy text-white py-5 rounded-[2rem] font-black shadow-premium hover:bg-brand-accent dark:hover:bg-brand-accent dark:hover:text-white transition-all uppercase text-[10px] tracking-[0.2em] flex items-center justify-center gap-4 group btn-press">
                   <Save size={20} className="group-hover:animate-bounce" /> 
                   {editingMaterial ? 'Confirmar Alterações' : 'Catalogar Novo Ativo'}
                </button>
@@ -546,7 +545,7 @@ const MaterialManagement: React.FC = () => {
       {/* CONFIRM DELETE MODAL */}
       {isDeleteModalOpen && materialToDelete && (
         <div className="fixed inset-0 bg-brand-navy/98 dark:bg-black/90 backdrop-blur-3xl flex items-center justify-center z-[120] p-6 animate-in fade-in duration-300">
-          <div className="bg-white dark:bg-[#1e293b] w-full max-w-sm rounded-[4rem] shadow-gesla-hard overflow-hidden animate-in zoom-in duration-500 border border-white/20 relative">
+          <div className="bg-white dark:bg-[#1e293b] w-full max-w-sm rounded-[4rem] shadow-premium overflow-hidden animate-in zoom-in duration-500 border border-white/20 relative">
             <div className="p-12 text-center pb-6">
                <div className="w-24 h-24 bg-brand-red/10 rounded-[2.5rem] flex items-center justify-center text-brand-red mx-auto mb-8 shadow-glow-red border border-brand-red/10 relative group">
                  <ShieldAlert size={48} className="relative z-10 animate-pulse" />

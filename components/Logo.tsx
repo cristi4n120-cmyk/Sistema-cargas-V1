@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 interface LogoProps {
@@ -95,7 +94,6 @@ const Logo: React.FC<LogoProps> = ({ className = '', size = 180, white = false, 
         <g transform={isIcon ? "translate(5, 5) scale(0.9)" : "translate(10, -10) scale(0.9)"} className="mage-float">
           
           {/* 1. VOLUME FILL (Corpo etéreo) */}
-          {/* Mesma forma do contorno, mas fechado para gradiente */}
           <path 
             d="M 10 75 Q 50 92 90 75 Q 85 65 70 65 L 65 65 C 60 40, 55 25, 45 15 C 35 5, 10 25, 12 38 Q 20 30, 32 38 C 35 50, 30 60, 30 65 Q 20 65 10 75 Z" 
             fill="url(#mageGradient)" 
@@ -103,16 +101,6 @@ const Logo: React.FC<LogoProps> = ({ className = '', size = 180, white = false, 
           />
 
           {/* 2. SILHUETA PRINCIPAL (Traço forte) */}
-          {/* 
-             Lógica do desenho:
-             - Começa na ponta esquerda da aba (10, 75)
-             - Faz a curva da aba inferior até a direita (90, 75)
-             - Sobe para a copa pelo lado direito, inclinando para a esquerda (65, 65 -> 45, 15)
-             - Faz a curva da ponta caída (The Droop) voltando para a esquerda e baixo (12, 38)
-             - Faz a dobra da ponta (The Fold) (32, 38)
-             - Desce pelo lado esquerdo da copa até a aba (30, 65)
-             - Fecha a aba superior esquerda
-          */}
           <path 
             d="M 10 75 Q 50 92 90 75 M 88 73 C 80 65, 75 65, 65 65 C 62 45, 55 25, 45 15 C 35 5, 10 25, 12 38 Q 20 30, 32 38 C 35 55, 28 62, 30 65 C 20 65, 15 68, 10 75" 
             stroke="var(--color-primary)" 
@@ -123,8 +111,6 @@ const Logo: React.FC<LogoProps> = ({ className = '', size = 180, white = false, 
           />
 
           {/* 3. DETALHES INTERNOS (Dobras & Faixa) */}
-          
-          {/* Faixa do Chapéu (Band) - Curva na base da copa */}
           <path 
             d="M 31 62 Q 48 70 64 62" 
             stroke="var(--color-accent)" 
@@ -134,7 +120,6 @@ const Logo: React.FC<LogoProps> = ({ className = '', size = 180, white = false, 
             style={{ animationDelay: '0.4s', opacity: 0.9 }}
           />
 
-          {/* Dobra da Ponta (Crease) - Dá volume ao "bico" caído */}
           <path 
             d="M 32 38 Q 38 42 36 50" 
             stroke="var(--color-primary)" 
@@ -144,7 +129,6 @@ const Logo: React.FC<LogoProps> = ({ className = '', size = 180, white = false, 
             style={{ animationDelay: '0.6s', opacity: 0.5 }}
           />
 
-          {/* Dobra da Aba (Brim Fold) - Pequeno detalhe na direita */}
           <path 
             d="M 85 72 Q 80 75 75 72" 
             stroke="var(--color-primary)" 
@@ -155,7 +139,6 @@ const Logo: React.FC<LogoProps> = ({ className = '', size = 180, white = false, 
           />
 
           {/* 4. THE EYE (Núcleo Mágico) */}
-          {/* Pequeno ponto de luz na faixa */}
           <circle 
             cx="48" 
             cy="66" 
