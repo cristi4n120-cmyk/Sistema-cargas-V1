@@ -1,0 +1,275 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gesla Logística | LogiControl Pro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      /* --- GESLA DESIGN TOKENS (THEME ENGINE) --- */
+      :root {
+        /* LIGHT MODE PALETTE - ENTERPRISE CLEAN */
+        --color-obsidian: 241 245 249; /* Slate 100 */
+        --color-surface: 255 255 255; 
+        --color-surface-highlight: 248 250 252;
+        --color-border: 226 232 240; 
+        
+        --color-brand-red: 225 29 72; 
+        --color-brand-accent: 225 29 72; /* Red accent in Light Mode */
+        --color-brand-navy: 15 23 42; 
+        
+        --color-text-main: 15 23 42;    
+        --color-text-muted: 100 116 139;
+
+        /* PHYSICS & DEPTH - LIGHT */
+        --shadow-premium: 0 4px 20px -2px rgba(0, 0, 0, 0.05), 0 10px 40px -10px rgba(0, 0, 0, 0.02);
+        --shadow-glow: 0 0 0 0 transparent; /* No glow in light mode generally */
+        --shadow-glow-hover: 0 20px 40px -10px rgba(225, 29, 72, 0.15);
+        --glass-border: 1px solid rgba(226, 232, 240, 0.8);
+        --glass-bg: rgba(255, 255, 255, 0.7);
+      }
+
+      .dark {
+        /* DARK MODE PALETTE - NEON CYBER */
+        --color-obsidian: 2 6 23;
+        --color-surface: 15 23 42;
+        --color-surface-highlight: 30 41 59;
+        --color-border: 255 255 255;
+        
+        --color-brand-red: 225 29 72; 
+        --color-brand-accent: 139 92 246; /* Violet accent in Dark Mode */
+        --color-brand-navy: 2 6 23;
+
+        --color-text-main: 248 250 252;
+        --color-text-muted: 148 163 184;
+
+        /* PHYSICS & DEPTH - DARK */
+        --shadow-premium: 0 0 0 1px rgba(255,255,255,0.03), 0 20px 50px -12px rgba(0,0,0,0.8);
+        --shadow-glow: 0 0 30px -5px rgba(139, 92, 246, 0.15); 
+        --shadow-glow-hover: 0 0 60px -10px rgba(139, 92, 246, 0.4);
+        --shadow-glow-danger: 0 0 40px -10px rgba(225, 29, 72, 0.3);
+        
+        --glass-border: 1px solid rgba(255, 255, 255, 0.08);
+        --glass-bg: rgba(15, 23, 42, 0.4);
+      }
+
+      /* GLOBAL RESET & TYPOGRAPHY */
+      body { 
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        background-color: rgb(var(--color-obsidian));
+        color: rgb(var(--color-text-main));
+        -webkit-font-smoothing: antialiased;
+        overflow-x: hidden;
+        transition: background-color 0.7s cubic-bezier(0.2, 0.8, 0.2, 1), color 0.5s ease;
+      }
+      
+      .font-data { font-family: 'JetBrains Mono', monospace; }
+      
+      ::selection {
+        background-color: rgba(var(--color-brand-accent), 0.3);
+        color: inherit;
+        text-shadow: 0 0 10px rgba(var(--color-brand-accent), 0.5);
+      }
+
+      /* SCROLLBAR - CYBERNETIC STYLE */
+      ::-webkit-scrollbar { width: 5px; height: 5px; }
+      ::-webkit-scrollbar-track { background: transparent; }
+      ::-webkit-scrollbar-thumb { 
+        background: rgba(148, 163, 184, 0.2); 
+        border-radius: 10px; 
+        transition: background 0.3s;
+      }
+      ::-webkit-scrollbar-thumb:hover { background: rgb(var(--color-brand-accent)); }
+
+      /* --- ADVANCED UTILITIES --- */
+      
+      /* Glassmorphism Panel */
+      .glass-panel {
+        background: var(--glass-bg);
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+        border: var(--glass-border);
+        box-shadow: var(--shadow-premium);
+      }
+
+      /* Holographic Card Hover */
+      .holo-card {
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+      }
+      .holo-card::after {
+        content: '';
+        position: absolute;
+        top: 0; left: -150%;
+        width: 100%; height: 100%;
+        background: linear-gradient(
+          90deg, 
+          transparent, 
+          rgba(255, 255, 255, 0.05), 
+          rgba(255, 255, 255, 0.2), 
+          rgba(255, 255, 255, 0.05), 
+          transparent
+        );
+        transform: skewX(-25deg);
+        transition: left 0.7s ease;
+        pointer-events: none;
+        z-index: 2;
+      }
+      .holo-card:hover {
+        transform: translateY(-4px) scale(1.01);
+        box-shadow: var(--shadow-glow-hover);
+        border-color: rgba(var(--color-brand-accent), 0.3);
+      }
+      .holo-card:hover::after {
+        left: 150%;
+        transition: left 0.7s ease 0.1s;
+      }
+
+      /* Button Interaction */
+      .btn-press {
+        transition: transform 0.1s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s, background 0.3s;
+      }
+      .btn-press:active {
+        transform: scale(0.96);
+      }
+      .btn-press:hover {
+        filter: brightness(1.1);
+      }
+
+      /* Input Fields */
+      .input-tactical:focus-visible {
+        outline: none;
+        border-color: rgb(var(--color-brand-accent));
+        box-shadow: 0 0 0 3px rgba(var(--color-brand-accent), 0.15);
+      }
+
+      /* --- ANIMATIONS --- */
+      
+      @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-8px); }
+      }
+      .animate-float { animation: float 6s ease-in-out infinite; }
+
+      @keyframes pulse-glow {
+        0%, 100% { box-shadow: 0 0 0 0px rgba(var(--color-brand-accent), 0.0); }
+        50% { box-shadow: 0 0 20px 5px rgba(var(--color-brand-accent), 0.2); }
+      }
+      .animate-pulse-glow { animation: pulse-glow 3s infinite; }
+
+      @keyframes slide-up-fade {
+        from { opacity: 0; transform: translateY(20px); filter: blur(5px); }
+        to { opacity: 1; transform: translateY(0); filter: blur(0); }
+      }
+      .animate-enter { animation: slide-up-fade 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+
+      /* SIDEBAR SPECIFIC KINETICS */
+      @keyframes sidebar-deploy {
+        0% { 
+          transform: translateX(-100%) rotateY(15deg); 
+          opacity: 0; 
+          filter: blur(10px);
+        }
+        100% { 
+          transform: translateX(0) rotateY(0deg); 
+          opacity: 1; 
+          filter: blur(0);
+        }
+      }
+      .animate-sidebar-deploy {
+        animation: sidebar-deploy 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        transform-origin: left center;
+      }
+
+      @keyframes scan-vertical {
+        0% { top: -10%; opacity: 0; }
+        20% { opacity: 1; }
+        80% { opacity: 1; }
+        100% { top: 110%; opacity: 0; }
+      }
+      .animate-scan-vertical {
+        animation: scan-vertical 3s ease-in-out infinite;
+      }
+
+      @keyframes cyber-slash {
+        0% { transform: translateX(-120%) skewX(-20deg); }
+        100% { transform: translateX(120%) skewX(-20deg); }
+      }
+      
+      @keyframes nav-item-pop {
+        0% { transform: scale(1); }
+        50% { transform: scale(0.95); }
+        100% { transform: scale(1); }
+      }
+
+      /* Staggered Delays for Lists */
+      .stagger-1 { animation-delay: 50ms; }
+      .stagger-2 { animation-delay: 100ms; }
+      .stagger-3 { animation-delay: 150ms; }
+      .stagger-4 { animation-delay: 200ms; }
+      .stagger-5 { animation-delay: 250ms; }
+
+    </style>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              obsidian: 'rgb(var(--color-obsidian) / <alpha-value>)',
+              surface: {
+                DEFAULT: 'rgb(var(--color-surface) / <alpha-value>)',
+                highlight: 'rgb(var(--color-surface-highlight) / <alpha-value>)',
+              },
+              brand: {
+                red: 'rgb(var(--color-brand-red) / <alpha-value>)',
+                navy: 'rgb(var(--color-brand-navy) / <alpha-value>)', 
+                navyLight: '#1e293b',
+                accent: 'rgb(var(--color-brand-accent) / <alpha-value>)',
+              }
+            },
+            fontFamily: {
+              sans: ['Plus Jakarta Sans', 'Inter', 'sans-serif'],
+              mono: ['JetBrains Mono', 'monospace'],
+            },
+            boxShadow: {
+              'premium': 'var(--shadow-premium)',
+              'glow': 'var(--shadow-glow)',
+              'glow-hover': 'var(--shadow-glow-hover)',
+              'glow-danger': 'var(--shadow-glow-danger)',
+            },
+            animation: {
+              'enter': 'slide-up-fade 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards',
+              'float': 'float 6s ease-in-out infinite',
+              'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+              'spin-slow': 'spin 3s linear infinite',
+            },
+            backgroundImage: {
+              'grid-pattern': "linear-gradient(to right, #80808012 1px, transparent 1px), linear-gradient(to bottom, #80808012 1px, transparent 1px)",
+            }
+          }
+        }
+      }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <script type="importmap">
+{
+  "imports": {
+    "recharts": "https://esm.sh/recharts@^3.6.0",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-router-dom": "https://esm.sh/react-router-dom@^7.12.0",
+    "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "jspdf": "https://esm.sh/jspdf@^2.5.1"
+  }
+}
+</script>
+</head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
