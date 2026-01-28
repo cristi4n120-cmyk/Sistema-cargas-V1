@@ -34,7 +34,7 @@ const BootScreen: React.FC<{ onComplete: () => void }> = ({ onComplete }) => {
     "MOUNTING VIRTUAL FILE SYSTEM (VFS)...",
     "ALLOCATING MEMORY BLOCKS [0x0000 - 0xFFFF]...",
     "VERIFYING SECURITY HANDSHAKE...",
-    "LOADING GESLA CORE MODULES...",
+    "LOADING LOGICONTROL CORE MODULES...",
     "CONNECTING TO SECURE DATA STREAM...",
     "DECRYPTING USER PROTOCOLS...",
     "SYNCHRONIZING FISCAL PARAMETERS (DIFAL/ICMS)...",
@@ -148,7 +148,7 @@ const BootScreen: React.FC<{ onComplete: () => void }> = ({ onComplete }) => {
       </div>
 
       <div className="absolute bottom-8 text-[8px] font-black text-slate-700 uppercase tracking-[0.5em]">
-        LogiControl System v2.6.0
+        LogiControl Pro v2.6.0
       </div>
     </div>
   );
