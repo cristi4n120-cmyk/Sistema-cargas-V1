@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useMemo } from 'react';
 import { 
   Building2, Plus, Search, Phone, Mail, User, Trash2, Edit3, X, 
