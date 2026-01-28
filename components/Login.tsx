@@ -54,7 +54,7 @@ const Login: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   // Textos animados
-  const titleText = useScrambleText("GESLA OS", mounted);
+  const titleText = useScrambleText("LOGICONTROL OS", mounted);
   const subtitleText = useScrambleText("LOGICONTROL PRO ACCESS", mounted);
 
   useEffect(() => {

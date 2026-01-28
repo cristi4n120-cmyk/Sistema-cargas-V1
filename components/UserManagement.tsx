@@ -282,7 +282,7 @@ const UserManagement: React.FC = () => {
              <div className="p-2 bg-brand-navy/5 dark:bg-white/10 rounded-xl text-brand-navy dark:text-slate-400 shadow-sm group-hover:rotate-12 transition-transform duration-500">
                 <Users size={18} />
              </div>
-             <span className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-[0.4em]">Gesla Personnel Command</span>
+             <span className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-[0.4em]">LogiControl Personnel</span>
           </div>
           <h2 className="text-5xl font-black text-brand-navy dark:text-white tracking-tighter uppercase leading-none">
             Time de <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-accent to-purple-600 animate-pulse-slow">Elite</span>
@@ -407,7 +407,7 @@ const UserManagement: React.FC = () => {
                 </div>
               </div>
 
-              <div className="mt-8 pt-6 border-t border-slate-50 dark:border-white/5 relative z-10 flex items-center justify-between opacity-0 group-hover:opacity-100 transition-all translate-y-4 group-hover:translate-y-0 duration-300">
+              <div className="mt-8 pt-6 border-t border-slate-5 dark:border-white/5 relative z-10 flex items-center justify-between opacity-0 group-hover:opacity-100 transition-all translate-y-4 group-hover:translate-y-0 duration-300">
                 <span className="text-[8px] font-black text-slate-300 dark:text-slate-600 font-data">ID: {user.id.slice(0, 4)}</span>
                 
                 <div className="flex gap-2">

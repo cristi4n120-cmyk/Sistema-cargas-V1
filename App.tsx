@@ -241,7 +241,7 @@ const App: React.FC = () => {
              <div className="flex items-center gap-4 opacity-40 hover:opacity-100 transition-opacity cursor-default group">
                 <Logo size={30} variant="icon" className="grayscale group-hover:grayscale-0 transition-all duration-500" />
                 <div className="h-3 w-px bg-slate-300 dark:bg-white/20"></div>
-                <span className="text-[9px] font-black uppercase tracking-[0.3em] text-slate-500">Gesla System</span>
+                <span className="text-[9px] font-black uppercase tracking-[0.3em] text-slate-500">LogiControl System</span>
              </div>
              <p className="text-[8px] font-bold text-slate-400 dark:text-slate-600 uppercase tracking-[0.3em] font-data">
                SECURE CONNECTION • ENCRYPTED
