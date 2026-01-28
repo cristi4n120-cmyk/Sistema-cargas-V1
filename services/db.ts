@@ -60,7 +60,11 @@ const SEED_DATA = {
       active: true,
       url: 'https://hooks.zapier.com/hooks/catch/26225775/ulyv8hk/',
       apiKey: '',
-      events: [], 
+      events: [
+        SystemEventType.CARGA_EXPEDIDO,
+        SystemEventType.CARGA_CONCLUIDO,
+        SystemEventType.CARGA_CANCELADO
+      ], 
       filters: [] 
     },
     // Templates de Notificação Padrão
