@@ -272,7 +272,7 @@ const Settings: React.FC = () => {
           <div className="flex items-center gap-3">
             <div className="px-3 py-1 bg-brand-navy dark:bg-white/10 rounded-full border border-white/10 flex items-center gap-2 shadow-lg backdrop-blur-md hover:scale-105 transition-transform">
               <Sparkles size={12} className="text-brand-accent animate-pulse" />
-              <span className="text-[9px] font-black text-white uppercase tracking-[0.3em]">System Core • v2.6</span>
+              <span className="text-[9px] font-black text-white uppercase tracking-[0.3em]">System Core • v2.6.0</span>
             </div>
           </div>
           <h2 className="text-5xl font-black text-brand-navy dark:text-white uppercase tracking-tighter leading-none">

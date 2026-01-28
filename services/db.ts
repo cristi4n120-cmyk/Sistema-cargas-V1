@@ -45,7 +45,7 @@ const SEED_DATA = {
     },
     erpWebhookUrl: '', // Mantido para retrocompatibilidade
     apiKey: 'ak_live_987654321', // Mantido para retrocompatibilidade
-    notificationEmail: 'logistica@gmail.com',
+    notificationEmail: 'logistica@geslaisolamentos.com',
     darkMode: false,
     requirePaymentProof: true,
     requireDifalGuide: true,
@@ -115,7 +115,7 @@ const SEED_DATA = {
   },
   USERS: [
     { 
-        id: '1', name: 'Adrian Oliveira', email: 'logistica@gmail.com', role: UserRole.ADMIN, 
+        id: '1', name: 'Adrian Oliveira', email: 'logistica@geslaisolamentos.com', role: UserRole.ADMIN, 
         password: 'admin', username: 'adrian', department: 'Gerência de Logística', lastActivity: 'Agora'
     }
   ],

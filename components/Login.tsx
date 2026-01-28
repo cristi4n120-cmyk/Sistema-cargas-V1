@@ -412,7 +412,7 @@ const Login: React.FC = () => {
            <div className="flex items-center gap-3">
               <Cpu size={14} className="text-slate-500" />
               <div className="h-px w-10 bg-white/10"></div>
-              <span className="text-[9px] font-black text-slate-400 uppercase tracking-[0.2em]">LogiControl Pro v2.6</span>
+              <span className="text-[9px] font-black text-slate-400 uppercase tracking-[0.2em]">LogiControl Pro v2.6.0</span>
            </div>
         </div>
 
