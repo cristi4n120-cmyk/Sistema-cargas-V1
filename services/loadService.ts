@@ -188,7 +188,7 @@ export const loadService = {
         doc.setFont('helvetica', 'bold');
         doc.setFontSize(24); 
         doc.setTextColor(COLORS.DARK);
-        doc.text('GESLA', MARGIN + 8, MARGIN + 9);
+        doc.text('LOGICONTROL', MARGIN + 8, MARGIN + 9);
 
         doc.setFontSize(8); 
         doc.setTextColor(COLORS.GRAY_TXT);
@@ -241,7 +241,7 @@ export const loadService = {
            }
            const bottomY = PAGE_HEIGHT - 8;
            doc.setFontSize(6); doc.setTextColor(COLORS.GRAY_TXT); doc.setFont('helvetica', 'bold');
-           doc.text('GESLA LOGICONTROL PRO', MARGIN, bottomY);
+           doc.text('LOGICONTROL PRO SYSTEM', MARGIN, bottomY);
            doc.setFontSize(8);
            doc.text(load.portCode, PAGE_WIDTH / 2, bottomY, { align: 'center' });
            doc.setFontSize(6);
@@ -603,7 +603,7 @@ export const loadService = {
         });
         
         if (settings.enableWhatsAppBot && settings.whatsappBotNumber) {
-           const message = `🚨 *ALERTA FISCAL - GESLA*\n\nCarga: *${updatedLoad.portCode}*\nStatus: *${status}*\n⚠️ Pendência de DIFAL (Obrigatório).`;
+           const message = `🚨 *ALERTA FISCAL - LOGICONTROL*\n\nCarga: *${updatedLoad.portCode}*\nStatus: *${status}*\n⚠️ Pendência de DIFAL (Obrigatório).`;
            const link = loadService.generateWhatsAppLink(settings.whatsappBotNumber, message);
            notificationService.addNotification({
              title: 'Bot: Risco Fiscal',

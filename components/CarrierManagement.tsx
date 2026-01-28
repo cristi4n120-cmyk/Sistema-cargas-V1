@@ -528,7 +528,7 @@ const CarrierManagement: React.FC = () => {
       case 5: // CIF X FOB
         if (!carrierMetrics) return null;
         const pieData = [
-          { name: 'CIF (Pago Gesla)', value: carrierMetrics.cifCount, color: '#7c3aed' },
+          { name: 'CIF (Pago LogiControl)', value: carrierMetrics.cifCount, color: '#7c3aed' },
           { name: 'FOB (Pago Cliente)', value: carrierMetrics.fobCount, color: '#06b6d4' },
         ];
         return (
@@ -557,7 +557,7 @@ const CarrierManagement: React.FC = () => {
                 <div className="bg-purple-50 dark:bg-purple-900/10 p-8 rounded-[3rem] border border-purple-100 dark:border-purple-500/20 h-full flex flex-col justify-center">
                    <span className="text-[10px] font-black text-purple-600 dark:text-purple-400 uppercase tracking-widest mb-2">Operações CIF</span>
                    <span className="text-5xl font-black text-brand-navy dark:text-white font-data">{carrierMetrics.cifCount}</span>
-                   <p className="text-[9px] font-bold text-slate-500 mt-2 uppercase">Frete sob gestão Gesla</p>
+                   <p className="text-[9px] font-bold text-slate-500 mt-2 uppercase">Frete sob gestão LogiControl</p>
                 </div>
                 <div className="bg-cyan-50 dark:bg-cyan-900/10 p-8 rounded-[3rem] border border-cyan-100 dark:border-cyan-500/20 h-full flex flex-col justify-center">
                    <span className="text-[10px] font-black text-cyan-600 dark:text-cyan-400 uppercase tracking-widest mb-2">Operações FOB</span>

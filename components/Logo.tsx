@@ -170,7 +170,7 @@ const Logo: React.FC<LogoProps> = ({ className = '', size = 180, white = false, 
         {/* --- TEXT MARK (Full Variant) --- */}
         {!isIcon && (
           <>
-            <text x="110" y="65" className="gesla-text">GESLA</text>
+            <text x="110" y="65" className="gesla-text">LOGIC</text>
             {/* Decorative Dot */}
             <circle cx="285" cy="52" r="3.5" fill="var(--color-accent)" className="animate-pulse" />
           </>

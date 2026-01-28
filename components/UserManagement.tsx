@@ -202,7 +202,7 @@ const UserManagement: React.FC = () => {
         </div>
         <h2 className="text-4xl font-black text-brand-navy dark:text-white uppercase tracking-tighter mb-4">Protocolo de Acesso Privado</h2>
         <p className="text-slate-400 font-bold text-[10px] uppercase tracking-[0.4em] max-w-sm leading-relaxed">
-          O gerenciamento da rede operacional Gesla é restrito à diretoria de sistemas.
+          O gerenciamento da rede operacional LogiControl é restrito à diretoria de sistemas.
         </p>
         <button 
           type="button"
@@ -559,7 +559,7 @@ const UserManagement: React.FC = () => {
                          icon={Mail} 
                          value={formData.email} 
                          onChange={(e: any) => setFormData({...formData, email: e.target.value.toLowerCase()})}
-                         placeholder="nome@gesla.com.br"
+                         placeholder="nome@logicontrol.com.br"
                          type="email"
                          required
                       />
@@ -647,7 +647,7 @@ const UserManagement: React.FC = () => {
                </div>
                <h3 className="text-3xl font-black text-brand-navy dark:text-white uppercase tracking-tighter leading-none mb-4">Revogar Acesso?</h3>
                <p className="text-slate-500 text-[10px] font-bold leading-relaxed uppercase tracking-[0.2em] px-6">
-                O colaborador <span className="text-brand-red font-black">{userToDelete.name}</span> perderá acesso imediato a todo o ecossistema Gesla.
+                O colaborador <span className="text-brand-red font-black">{userToDelete.name}</span> perderá acesso imediato a todo o ecossistema LogiControl.
               </p>
             </div>
             <div className="p-12 pt-0 flex flex-col gap-4">

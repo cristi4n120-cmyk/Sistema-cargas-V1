@@ -103,8 +103,8 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
 
               {/* Text Reveal with Glitch Effect */}
               <div className={`flex flex-col overflow-hidden whitespace-nowrap transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] origin-left ${isExpanded ? 'w-auto opacity-100 translate-x-0' : 'w-0 opacity-0 -translate-x-8 blur-sm'}`}>
-                <h1 className="text-2xl font-black text-white tracking-tighter leading-none relative group-hover/logo:text-transparent group-hover/logo:bg-clip-text group-hover/logo:bg-gradient-to-r group-hover/logo:from-white group-hover/logo:to-brand-accent transition-all duration-300">
-                  GESLA
+                <h1 className="text-xl font-black text-white tracking-tighter leading-none relative group-hover/logo:text-transparent group-hover/logo:bg-clip-text group-hover/logo:bg-gradient-to-r group-hover/logo:from-white group-hover/logo:to-brand-accent transition-all duration-300">
+                  LOGICONTROL
                   <span className="absolute -top-0.5 -right-2 w-1.5 h-1.5 bg-brand-accent rounded-full animate-ping shadow-[0_0_8px_rgba(var(--color-brand-accent),0.8)]"></span>
                 </h1>
                 <div className="flex items-center gap-2 mt-1">

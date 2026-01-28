@@ -349,7 +349,7 @@ const Settings: React.FC = () => {
                 <SectionHeader title="Identidade do Sistema" subtitle="Dados Mestre & Aparência" icon={Building2} />
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 relative z-10">
-                    <TacticalInput label="Razão Social Gesla" value={settings.companyName} onChange={(e: any) => setSettings({...settings, companyName: e.target.value})} icon={Building2} />
+                    <TacticalInput label="Razão Social LogiControl" value={settings.companyName} onChange={(e: any) => setSettings({...settings, companyName: e.target.value})} icon={Building2} />
                     <TacticalInput label="CNPJ Matriz" value={settings.companyCnpj} onChange={(e: any) => setSettings({...settings, companyCnpj: e.target.value})} icon={FileCheck} />
                     <div className="md:col-span-2">
                     <TacticalInput label="E-mail de Notificações" value={settings.notificationEmail} onChange={(e: any) => setSettings({...settings, notificationEmail: e.target.value})} icon={Mail} type="email" />
