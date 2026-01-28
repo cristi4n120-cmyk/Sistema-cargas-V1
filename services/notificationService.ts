@@ -1,4 +1,3 @@
-
 import { Notification } from '../types';
 import { db } from './db';
 
@@ -9,16 +8,18 @@ export const notificationService = {
 
   markAsRead: (id: string) => {
     db.notifications.update(id, { read: true });
-    window.dispatchEvent(new Event('notificationsChanged'));
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new Event('notificationsChanged'));
+    }
   },
 
   markAllAsRead: () => {
     const notifs = db.notifications.getAll();
     const updated = notifs.map(n => ({ ...n, read: true }));
-    // A classe MockDB Table é simples, então salvamos o array inteiro manualmente aqui
-    // já que update em lote não foi implementado na classe base para manter simplicidade
-    localStorage.setItem('gesla_db_notifications', JSON.stringify(updated));
-    window.dispatchEvent(new Event('notificationsChanged'));
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('gesla_db_notifications', JSON.stringify(updated));
+      window.dispatchEvent(new Event('notificationsChanged'));
+    }
   },
 
   addNotification: (notif: Omit<Notification, 'id' | 'read' | 'time'>) => {
@@ -29,6 +30,8 @@ export const notificationService = {
       read: false
     };
     db.notifications.create(newNotif);
-    window.dispatchEvent(new Event('notificationsChanged'));
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new Event('notificationsChanged'));
+    }
   }
 };

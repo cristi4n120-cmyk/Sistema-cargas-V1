@@ -1,4 +1,3 @@
-
 import { SystemSettings, ShippingType } from '../types';
 import { db } from './db';
 
@@ -12,15 +11,17 @@ export const settingsService = {
 
   saveSettings: (settings: SystemSettings) => {
     db.settings.saveSettings(settings);
-    window.dispatchEvent(new Event('settingsChanged'));
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new Event('settingsChanged'));
+    }
     return settings;
   },
 
   resetToDefault: () => {
-    // Para resetar, limpamos a chave e o construtor da Table vai recarregar o SEED
-    localStorage.removeItem('gesla_db_settings');
-    // Forçamos um reload da página ou recriamos a tabela (mais simples reload para settings globais)
-    window.location.reload(); 
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('gesla_db_settings');
+      window.location.reload();
+    }
     return db.settings.getSettings();
   }
 };

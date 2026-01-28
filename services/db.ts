@@ -1,4 +1,3 @@
-
 import { 
   Load, Client, Carrier, Material, User, SystemSettings, Notification, SystemEvent, WebhookLog,
   LoadStatus, ShippingType, ClientType, MovementType, PaymentType, UserRole, SystemEventType 
@@ -362,11 +361,8 @@ const SEED_DATA = {
       updatedAt: new Date().toISOString()
     }
   ],
-  MATERIALS: [
-    // MATERIAIS ZERADOS
-  ],
+  MATERIALS: [],
   LOADS: [
-    // 1. CARGA FINALIZADA (MA) - Histórico (MANTIDO APENAS COMO REFERÊNCIA HISTÓRICA)
     {
       id: 'l_001', active: true, createdBy: '1', portCode: 'GSL-25-001', date: daysAgo(35),
       clientId: 'cli_vilagale_001', client: 'VILA GALE', clientType: ClientType.CONTRIBUTOR,
@@ -391,23 +387,31 @@ const SEED_DATA = {
         items: [{ id: 'i1', code: 'LR-50-600', description: 'PAINEL LÃ ROCHA 50MM', quantity: 150, unit: 'M2' }]
       }],
       items: [{ id: 'i1', code: 'LR-50-600', description: 'PAINEL LÃ ROCHA 50MM', quantity: 150, unit: 'M2' }],
-      updatedAt: daysAgo(30), paymentProof: 'comp_gsl001.pdf', difalGuide: 'gnre_ma.pdf', deliveryProof: 'canhoto_gsl001.jpg'
+      updatedAt: daysAgo(30), paymentProof: 'comp_gsl001.pdf', difalGuide: 'gnre_ma.pdf', deliveryProof: 'canhoto_gsl001.jpg',
+      vehicle: { type: 'Truck' }, history: []
     }
   ]
 };
 
-// Classe Genérica de Tabela
+// Classe Genérica de Tabela com Proteção de Ambiente
 class Table<T> {
   private key: string;
+  private initialData: any;
 
   constructor(key: string, initialData: any = []) {
     this.key = key;
-    if (!localStorage.getItem(this.key)) {
-      localStorage.setItem(this.key, JSON.stringify(initialData));
+    this.initialData = initialData;
+    
+    // Guard clause for SSR/Node environments
+    if (typeof window !== 'undefined') {
+      if (!localStorage.getItem(this.key)) {
+        localStorage.setItem(this.key, JSON.stringify(initialData));
+      }
     }
   }
 
   getAll(): T[] {
+    if (typeof window === 'undefined') return this.initialData;
     const data = localStorage.getItem(this.key);
     return data ? JSON.parse(data) : [];
   }
@@ -417,14 +421,16 @@ class Table<T> {
   }
 
   create(item: T): T {
+    if (typeof window === 'undefined') return item;
     const data = this.getAll();
-    const newItem = { ...item }; // Clone
+    const newItem = { ...item }; 
     data.unshift(newItem as any);
     this.save(data);
     return newItem;
   }
 
   update(id: string, updates: Partial<T>): T | null {
+    if (typeof window === 'undefined') return null;
     const data = this.getAll();
     const index = data.findIndex((item: any) => item.id === id);
     if (index === -1) return null;
@@ -436,13 +442,15 @@ class Table<T> {
   }
 
   delete(id: string): void {
+    if (typeof window === 'undefined') return;
     const data = this.getAll();
     const filtered = data.filter((item: any) => item.id !== id);
     this.save(filtered);
   }
 
-  // Específico para Settings (Objeto único, não array)
   getSettings(): T {
+    if (typeof window === 'undefined') return SEED_DATA.SETTINGS as unknown as T;
+    
     const data = localStorage.getItem(this.key);
     if (data) {
         const parsed = JSON.parse(data);
@@ -465,10 +473,12 @@ class Table<T> {
   }
 
   saveSettings(settings: T): void {
+    if (typeof window === 'undefined') return;
     localStorage.setItem(this.key, JSON.stringify(settings));
   }
 
   private save(data: T[]) {
+    if (typeof window === 'undefined') return;
     localStorage.setItem(this.key, JSON.stringify(data));
   }
 }
@@ -487,7 +497,9 @@ export const db = {
   
   // Utilitário para limpar o banco (reset)
   resetDatabase: () => {
-    localStorage.clear();
-    window.location.reload();
+    if (typeof window !== 'undefined') {
+      localStorage.clear();
+      window.location.reload();
+    }
   }
 };

@@ -1,4 +1,3 @@
-
 import { User, UserRole } from '../types';
 import { db } from './db';
 
@@ -12,14 +11,17 @@ export interface UserExtended extends User {
 }
 
 const notifyAuthChange = () => {
-  window.dispatchEvent(new Event('authUpdate'));
-  window.dispatchEvent(new Event('storage'));
+  if (typeof window !== 'undefined') {
+    window.dispatchEvent(new Event('authUpdate'));
+    window.dispatchEvent(new Event('storage'));
+  }
 };
 
 export const userService = {
   getUsers: () => db.users.getAll().map(({ password, ...user }: any) => user),
   
   isAuthenticated: () => {
+    if (typeof window === 'undefined') return false;
     try {
       const session = localStorage.getItem(SESSION_KEY);
       if (!session) return false;
@@ -30,7 +32,6 @@ export const userService = {
     }
   },
 
-  // Novo método para verificar sem logar (para animações de UI)
   validateCredentials: (username: string, password: string): boolean => {
     const users = db.users.getAll() as UserExtended[];
     return users.some(u => 
@@ -48,7 +49,9 @@ export const userService = {
     
     if (user) {
       const { password: _, ...userSafe } = user;
-      localStorage.setItem(SESSION_KEY, JSON.stringify(userSafe));
+      if (typeof window !== 'undefined') {
+        localStorage.setItem(SESSION_KEY, JSON.stringify(userSafe));
+      }
       notifyAuthChange();
       return userSafe;
     }
@@ -56,16 +59,20 @@ export const userService = {
   },
 
   getCurrentUser: (): UserExtended => {
-    try {
-      const session = localStorage.getItem(SESSION_KEY);
-      if (session) return JSON.parse(session);
-    } catch {}
-    // Fallback seguro se não houver sessão
+    if (typeof window !== 'undefined') {
+      try {
+        const session = localStorage.getItem(SESSION_KEY);
+        if (session) return JSON.parse(session);
+      } catch {}
+    }
+    // Fallback seguro
     return { id: '0', name: 'Visitante', role: UserRole.VIEWER, email: '' };
   },
 
   logout: () => {
-    localStorage.removeItem(SESSION_KEY);
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem(SESSION_KEY);
+    }
     notifyAuthChange();
   },
 
@@ -76,7 +83,9 @@ export const userService = {
     const user = users.find(u => u.id === id);
     if (user) {
       const { password: _, ...userSafe } = user;
-      localStorage.setItem(SESSION_KEY, JSON.stringify(userSafe));
+      if (typeof window !== 'undefined') {
+        localStorage.setItem(SESSION_KEY, JSON.stringify(userSafe));
+      }
       notifyAuthChange();
     }
   },
@@ -89,20 +98,20 @@ export const userService = {
       role: UserRole.OPERATOR,
       ...userData,
       username: userData.name?.toLowerCase().split(' ')[0].normalize("NFD").replace(/[\u0300-\u036f]/g, "") || 'user',
-      password: '123', // Senha padrão para novos usuários criados pelo admin
+      password: '123',
       lastActivity: 'Recém Criado'
     };
     db.users.create(newUser);
-    window.dispatchEvent(new Event('userChanged'));
+    if (typeof window !== 'undefined') window.dispatchEvent(new Event('userChanged'));
   },
 
   updateUser: (id: string, userData: Partial<UserExtended>) => {
     db.users.update(id, userData);
-    window.dispatchEvent(new Event('userChanged'));
+    if (typeof window !== 'undefined') window.dispatchEvent(new Event('userChanged'));
   },
 
   deleteUser: (id: string) => {
     db.users.delete(id);
-    window.dispatchEvent(new Event('userChanged'));
+    if (typeof window !== 'undefined') window.dispatchEvent(new Event('userChanged'));
   }
 };
