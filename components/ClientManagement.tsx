@@ -104,7 +104,6 @@ const ClientManagement: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [filterType, setFilterType] = useState<string>('all');
   
-  // UI States
   const [mode, setMode] = useState<'grid' | 'wizard'>('grid');
   const [activeStep, setActiveStep] = useState(1);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -126,7 +125,6 @@ const ClientManagement: React.FC = () => {
 
   useEffect(() => { refreshData(); }, []);
 
-  // --- MÉTODOS DE CÁLCULO ESTRATÉGICO ---
   const getClientMetrics = (clientId: string) => {
     const clientLoads = loads.filter(l => l.clientId === clientId || (l.client && l.client.includes(clients.find(c => c.id === clientId)?.name || 'XYZ')));
     const totalSpent = clientLoads.reduce((acc, l) => acc + (l.financial?.customerFreightValue || 0), 0);
@@ -191,10 +189,9 @@ const ClientManagement: React.FC = () => {
     }
   };
 
-  // --- WIZARD CONTENT RENDERER ---
   const renderWizardStep = () => {
     switch (activeStep) {
-      case 1: // IDENTIDADE & FISCAL
+      case 1: 
         return (
           <div className="space-y-8 animate-in slide-in-from-right-8 fade-in duration-500">
              <div className="bg-white dark:bg-[#1e293b] p-8 rounded-[3rem] border border-slate-100 dark:border-white/5 shadow-premium">
@@ -211,7 +208,6 @@ const ClientManagement: React.FC = () => {
                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <TacticalInput label="CNPJ / CPF" icon={Hash} value={formData.cnpj} onChange={(e: any) => setFormData({...formData, cnpj: maskDocument(e.target.value)})} maxLength={18} />
                       
-                      {/* FISCAL TOGGLE */}
                       <div className="bg-slate-50 dark:bg-white/5 p-4 rounded-2xl border border-slate-200 dark:border-white/10">
                          <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest block mb-4">Enquadramento Fiscal</label>
                          <FiscalSelector value={formData.type} onChange={(val: any) => setFormData({...formData, type: val})} />
@@ -222,7 +218,7 @@ const ClientManagement: React.FC = () => {
           </div>
         );
       
-      case 2: // GEOLOCALIZAÇÃO
+      case 2:
         return (
           <div className="space-y-8 animate-in slide-in-from-right-8 fade-in duration-500">
              <div className="bg-white dark:bg-[#1e293b] p-8 rounded-[3rem] border border-slate-100 dark:border-white/5 shadow-premium">
@@ -268,7 +264,7 @@ const ClientManagement: React.FC = () => {
           </div>
         );
 
-      case 3: // CONTATOS
+      case 3:
         return (
           <div className="space-y-8 animate-in slide-in-from-right-8 fade-in duration-500">
              <div className="bg-white dark:bg-[#1e293b] p-8 rounded-[3rem] border border-slate-100 dark:border-white/5 shadow-premium">
@@ -298,7 +294,6 @@ const ClientManagement: React.FC = () => {
   return (
     <div className="min-h-screen pb-20 animate-enter">
       
-      {/* HEADER: INTELLIGENCE HUB */}
       <div className="flex flex-col xl:flex-row justify-between items-start xl:items-end gap-8 relative z-10 mb-8 p-4 lg:p-0">
         <div className="space-y-2 group cursor-default">
           <div className="flex items-center gap-3">
@@ -342,10 +337,8 @@ const ClientManagement: React.FC = () => {
         )}
       </div>
 
-      {/* MODE: GRID VIEW */}
       {mode === 'grid' && (
         <div className="space-y-8 p-4 lg:p-0">
-           {/* CONTROL BAR */}
            <div className={`
              bg-white/80 dark:bg-[#1e293b]/80 backdrop-blur-xl p-3 pl-6 rounded-[2.5rem] shadow-premium dark:shadow-none 
              flex flex-wrap items-center justify-between gap-4 border border-slate-200/50 dark:border-white/5 
@@ -388,7 +381,6 @@ const ClientManagement: React.FC = () => {
              </div>
            </div>
 
-           {/* CLIENT CARDS */}
            <div className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-8">
              {filteredClients.map((client, idx) => {
                const metrics = getClientMetrics(client.id);
@@ -408,10 +400,8 @@ const ClientManagement: React.FC = () => {
                    `}
                    style={{ animationDelay: `${idx * 60}ms` }}
                  >
-                   {/* High Value Glow */}
                    {isHighValue && <div className="absolute -right-20 -top-20 w-40 h-40 bg-brand-accent/10 rounded-full blur-3xl pointer-events-none group-hover:bg-brand-accent/20 transition-colors"></div>}
 
-                   {/* CARD HEADER */}
                    <div className="flex justify-between items-start mb-8 relative z-10">
                      <div className="flex items-center gap-5 min-w-0">
                        <div className={`
@@ -448,7 +438,6 @@ const ClientManagement: React.FC = () => {
                      )}
                    </div>
 
-                   {/* INFO GRID */}
                    <div className="space-y-5 flex-1 relative z-10">
                      <div className="grid grid-cols-2 gap-4">
                         <div className="p-3 rounded-2xl bg-slate-50 dark:bg-[#020617] border border-slate-100 dark:border-white/5">
@@ -476,7 +465,6 @@ const ClientManagement: React.FC = () => {
                      </div>
                    </div>
 
-                   {/* METRICS DASHBOARD (MINI) */}
                    <div className="mt-8 pt-6 border-t border-slate-100 dark:border-white/5 grid grid-cols-3 gap-2 relative z-10">
                       <div className="text-center border-r border-slate-100 dark:border-white/5 pr-2">
                          <span className="text-[8px] font-black text-slate-400 uppercase tracking-widest block mb-1">Cargas</span>
@@ -503,7 +491,6 @@ const ClientManagement: React.FC = () => {
                       </div>
                    </div>
 
-                   {/* ACTION OVERLAY (HOVER) */}
                    <div className="absolute inset-0 bg-brand-navy/90 dark:bg-brand-accent/90 backdrop-blur-sm flex items-center justify-center gap-4 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-300 z-20">
                       <button 
                         onClick={() => handleEdit(client)}
@@ -529,11 +516,9 @@ const ClientManagement: React.FC = () => {
         </div>
       )}
 
-      {/* MODE: WIZARD */}
       {mode === 'wizard' && (
         <div className="grid grid-cols-1 xl:grid-cols-12 gap-8 p-4 lg:p-0">
            
-           {/* LEFT NAVIGATION */}
            <div className="xl:col-span-3 space-y-4">
               <div className="bg-white dark:bg-[#1e293b] p-6 rounded-[2.5rem] border border-slate-100 dark:border-white/5 shadow-premium sticky top-24">
                  <button onClick={() => setMode('grid')} className="w-full mb-6 flex items-center gap-2 text-[9px] font-black text-slate-400 uppercase tracking-[0.2em] hover:text-brand-navy dark:hover:text-white transition-colors">
@@ -565,7 +550,6 @@ const ClientManagement: React.FC = () => {
               </div>
            </div>
 
-           {/* CENTER FORM */}
            <div className="xl:col-span-5">
               <form onSubmit={handleSubmit}>
                  {renderWizardStep()}
@@ -592,7 +576,6 @@ const ClientManagement: React.FC = () => {
               </form>
            </div>
 
-           {/* RIGHT LIVE PREVIEW */}
            <div className="xl:col-span-4 lg:sticky lg:top-24 h-fit animate-in slide-in-from-bottom-8 fade-in duration-700 delay-200">
               <div className="relative group">
                  <div className="absolute -inset-1 bg-gradient-to-br from-brand-accent to-purple-600 rounded-[2.6rem] blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
@@ -647,7 +630,6 @@ const ClientManagement: React.FC = () => {
         </div>
       )}
 
-      {/* DELETE MODAL */}
       {isDeleteModalOpen && clientToDelete && (
         <div className="fixed inset-0 bg-brand-navy/98 dark:bg-black/90 backdrop-blur-3xl flex items-center justify-center z-[120] p-6 animate-in fade-in duration-300">
           <div className="bg-white dark:bg-[#1e293b] w-full max-w-sm rounded-[4rem] shadow-premium overflow-hidden animate-in zoom-in duration-500 border border-white/20 relative">

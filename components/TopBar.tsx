@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import * as ReactRouterDOM from 'react-router-dom';
-const { useNavigate } = ReactRouterDOM;
+import { useNavigate } from 'react-router-dom';
 import { 
   Menu, Bell, Sun, Moon
 } from 'lucide-react';

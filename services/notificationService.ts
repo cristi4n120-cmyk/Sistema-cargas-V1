@@ -17,8 +17,10 @@ export const notificationService = {
     const notifs = db.notifications.getAll();
     const updated = notifs.map(n => ({ ...n, read: true }));
     if (typeof window !== 'undefined') {
-      localStorage.setItem('gesla_db_notifications', JSON.stringify(updated));
-      window.dispatchEvent(new Event('notificationsChanged'));
+      try {
+        localStorage.setItem('gesla_db_notifications', JSON.stringify(updated));
+        window.dispatchEvent(new Event('notificationsChanged'));
+      } catch {}
     }
   },
 

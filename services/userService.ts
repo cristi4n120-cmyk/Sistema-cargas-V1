@@ -50,7 +50,9 @@ export const userService = {
     if (user) {
       const { password: _, ...userSafe } = user;
       if (typeof window !== 'undefined') {
-        localStorage.setItem(SESSION_KEY, JSON.stringify(userSafe));
+        try {
+          localStorage.setItem(SESSION_KEY, JSON.stringify(userSafe));
+        } catch {}
       }
       notifyAuthChange();
       return userSafe;
@@ -71,7 +73,9 @@ export const userService = {
 
   logout: () => {
     if (typeof window !== 'undefined') {
-      localStorage.removeItem(SESSION_KEY);
+      try {
+        localStorage.removeItem(SESSION_KEY);
+      } catch {}
     }
     notifyAuthChange();
   },
@@ -84,7 +88,9 @@ export const userService = {
     if (user) {
       const { password: _, ...userSafe } = user;
       if (typeof window !== 'undefined') {
-        localStorage.setItem(SESSION_KEY, JSON.stringify(userSafe));
+        try {
+          localStorage.setItem(SESSION_KEY, JSON.stringify(userSafe));
+        } catch {}
       }
       notifyAuthChange();
     }

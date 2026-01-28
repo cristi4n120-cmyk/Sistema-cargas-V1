@@ -1,7 +1,5 @@
-
 import React, { useState, useEffect, useMemo } from 'react';
-import * as ReactRouterDOM from 'react-router-dom';
-const { useNavigate } = ReactRouterDOM;
+import { useNavigate } from 'react-router-dom';
 import { 
   Search, Archive, Calendar, MapPin, 
   RefreshCcw, Ban, TrendingUp, TrendingDown,
@@ -19,7 +17,6 @@ const LoadArchive: React.FC = () => {
 
   useEffect(() => {
     const allLoads = loadService.getLoads();
-    // Filtra apenas Concluídas e Canceladas para o arquivo e ordena por data decrescente
     setLoads(allLoads
       .filter(l => l.status === LoadStatus.COMPLETED || l.status === LoadStatus.CANCELLED)
       .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
@@ -50,8 +47,6 @@ const LoadArchive: React.FC = () => {
     const revenue = load.financial?.customerFreightValue || 0;
     const cost = (load.financial?.freightValue || load.freightValue || 0) + (load.financial?.extraCosts || 0);
     const profit = revenue - cost;
-    const margin = revenue > 0 ? (profit / revenue) * 100 : 0;
-
     let slaStatus = 'N/A';
     if (load.status === LoadStatus.COMPLETED && load.actualDeliveryDate && load.expectedDeliveryDate) {
         const actual = new Date(load.actualDeliveryDate).setHours(0,0,0,0);
@@ -59,13 +54,12 @@ const LoadArchive: React.FC = () => {
         slaStatus = actual <= expected ? 'ON_TIME' : 'LATE';
     }
 
-    return { revenue, cost, profit, margin, slaStatus };
+    return { revenue, cost, profit, slaStatus };
   };
 
   return (
     <div className="space-y-10 animate-enter pb-24 p-4 lg:p-0 min-h-screen">
       
-      {/* HEADER ATMOSFÉRICO */}
       <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-8 relative z-10">
         <div className="space-y-2 group cursor-default">
           <div className="flex items-center gap-3">
@@ -79,7 +73,6 @@ const LoadArchive: React.FC = () => {
           </h2>
         </div>
 
-        {/* SEARCH CAPSULE */}
         <div className={`
           relative w-full max-w-xl transition-all duration-300
           ${isSearching ? 'scale-[1.02]' : 'scale-100'}
@@ -105,15 +98,13 @@ const LoadArchive: React.FC = () => {
         </div>
       </div>
 
-      {/* TIMELINE CONTAINER */}
       <div className="relative pl-4 lg:pl-8">
         
-        {/* The Vertical Time Line */}
         <div className="absolute left-[27px] lg:left-[43px] top-0 bottom-0 w-[2px] bg-gradient-to-b from-slate-200 via-slate-200 to-transparent dark:from-white/10 dark:via-white/5 dark:to-transparent"></div>
 
         <div className="space-y-8">
           {filteredLoads.map((load, idx) => {
-            const { profit, margin, slaStatus } = getLoadMetrics(load);
+            const { profit, slaStatus } = getLoadMetrics(load);
             const isCancelled = load.status === LoadStatus.CANCELLED;
             const completionDate = load.actualDeliveryDate || load.updatedAt || load.date;
             const hasPOD = !!load.deliveryProof;
@@ -126,9 +117,7 @@ const LoadArchive: React.FC = () => {
                 style={{ animationDelay: `${idx * 80}ms` }}
               >
                 
-                {/* TIMELINE NODE */}
                 <div className="relative shrink-0 mt-6 z-10">
-                   {/* Glow Effect on Hover */}
                    <div className={`absolute inset-0 rounded-full blur-md opacity-0 group-hover:opacity-60 transition-opacity duration-300 ${isCancelled ? 'bg-rose-500' : 'bg-emerald-500'}`}></div>
                    
                    <div className={`
@@ -142,7 +131,6 @@ const LoadArchive: React.FC = () => {
                    </div>
                 </div>
 
-                {/* CARD CONTENT */}
                 <div className={`
                   flex-1 bg-white dark:bg-[#1e293b] rounded-[2rem] border transition-all duration-500 relative overflow-hidden
                   hover:translate-x-2 hover:shadow-xl
@@ -151,15 +139,12 @@ const LoadArchive: React.FC = () => {
                     : 'border-slate-100 dark:border-white/5 hover:border-slate-300 dark:hover:border-white/20'
                   }
                 `}>
-                  {/* Subtle Background Texture */}
                   <div className="absolute inset-0 bg-grid-pattern opacity-[0.03] pointer-events-none"></div>
                   
-                  {/* Decorative Left Strip */}
                   <div className={`absolute left-0 top-0 bottom-0 w-1 ${isCancelled ? 'bg-rose-500/20' : 'bg-slate-200 dark:bg-white/5'} transition-all duration-300 group-hover:w-1.5`}></div>
 
                   <div className="p-6 grid grid-cols-1 lg:grid-cols-12 gap-6 items-center relative z-10">
                     
-                    {/* INFO BLOCK 1: ID & DATE */}
                     <div className="lg:col-span-3 space-y-2">
                        <div className="flex items-center gap-2">
                           <span className={`text-[10px] font-black font-data px-2 py-1 rounded-md ${isCancelled ? 'bg-rose-50 dark:bg-rose-500/10 text-rose-600 dark:text-rose-400' : 'bg-slate-100 dark:bg-white/10 text-slate-600 dark:text-slate-300'}`}>
@@ -175,7 +160,6 @@ const LoadArchive: React.FC = () => {
                        </div>
                     </div>
 
-                    {/* INFO BLOCK 2: CLIENT & ROUTE */}
                     <div className="lg:col-span-4">
                        <h4 className={`text-sm font-black uppercase tracking-tight mb-1 truncate transition-colors ${isCancelled ? 'text-slate-400 line-through decoration-rose-500/50' : 'text-brand-navy dark:text-white group-hover:text-brand-accent'}`}>
                          {load.client}
@@ -186,7 +170,6 @@ const LoadArchive: React.FC = () => {
                        </div>
                     </div>
 
-                    {/* INFO BLOCK 3: METRICS HUD */}
                     <div className="lg:col-span-3">
                        {!isCancelled ? (
                          <div className="bg-slate-50 dark:bg-[#0f172a] rounded-xl p-3 border border-slate-100 dark:border-white/5 flex items-center justify-between group-hover:border-slate-200 dark:group-hover:border-white/10 transition-colors">
@@ -198,7 +181,6 @@ const LoadArchive: React.FC = () => {
                                </div>
                             </div>
                             <div className="text-right flex flex-col items-end">
-                               {/* POD INDICATOR */}
                                {hasPOD ? (
                                   <div className="flex items-center gap-1 text-[8px] font-black text-emerald-500 uppercase bg-emerald-50 dark:bg-emerald-500/10 px-1.5 py-0.5 rounded" title="Canhoto Digitalizado">
                                      <FileSignature size={10} /> POD OK
@@ -218,7 +200,6 @@ const LoadArchive: React.FC = () => {
                        )}
                     </div>
 
-                    {/* INFO BLOCK 4: ACTIONS */}
                     <div className="lg:col-span-2 flex justify-end">
                        <button
                           onClick={(e) => handleRestore(e, load.id)}
@@ -230,7 +211,6 @@ const LoadArchive: React.FC = () => {
 
                   </div>
                   
-                  {/* SLA STATUS LINE (Bottom) */}
                   {!isCancelled && slaStatus !== 'N/A' && (
                     <div className={`absolute bottom-0 left-0 right-0 h-1 ${slaStatus === 'ON_TIME' ? 'bg-emerald-500/20' : 'bg-amber-500/20'}`}>
                        <div className={`h-full ${slaStatus === 'ON_TIME' ? 'bg-emerald-500' : 'bg-amber-500'} w-[30%]`}></div>

@@ -32,7 +32,6 @@ const SEED_DATA = {
     defaultShippingType: ShippingType.FOB,
     autoArchiveDays: 30,
     // MATRIZ DIFAL (ORIGEM PR) - DEFINITIVA
-    // Base de Cálculo: Alíquota Interna Destino - Interestadual
     difalRates: { 
       'AC': 12,   'AL': 13,   'AM': 13,   'AP': 11,
       'BA': 13.5, 'CE': 13,   'DF': 13,   'ES': 10,
@@ -42,8 +41,8 @@ const SEED_DATA = {
       'RO': 12.5, 'RR': 13,   'RS': 5,    'SC': 5,
       'SE': 13,   'SP': 6,    'TO': 13
     },
-    erpWebhookUrl: '', // Mantido para retrocompatibilidade
-    apiKey: 'ak_live_987654321', // Mantido para retrocompatibilidade
+    erpWebhookUrl: '', 
+    apiKey: 'ak_live_987654321',
     notificationEmail: 'logistica@logicontrol.com',
     darkMode: false,
     requirePaymentProof: true,
@@ -54,7 +53,6 @@ const SEED_DATA = {
     autoDispatchAfterBilling: false,
     enableWhatsAppBot: false,
     whatsappBotNumber: '',
-    // Configuração de Webhook Externo
     webhookConfig: {
       active: true,
       url: 'https://hooks.zapier.com/hooks/catch/26225775/ulyv8hk/',
@@ -66,7 +64,6 @@ const SEED_DATA = {
       ], 
       filters: [] 
     },
-    // Templates de Notificação Padrão
     notificationTemplates: {
       [SystemEventType.CARGA_TRANSITO]: {
         event: SystemEventType.CARGA_TRANSITO,
@@ -136,132 +133,6 @@ const SEED_DATA = {
       active: true,
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString()
-    },
-    {
-      id: 'cli_engecass_001',
-      name: 'ENGECASS CALDEIRAS',
-      cnpj: '02.913.450/0001-09',
-      contact: 'SANDRO',
-      email: '',
-      phone: '(47) 98847-2999',
-      type: ClientType.CONTRIBUTOR,
-      zipCode: '89162-850',
-      address: 'RUA DOS VEREADORES',
-      number: '410',
-      neighborhood: 'VALADA ITOUPAVA',
-      city: 'RIO DO SUL',
-      state: 'SC',
-      active: true,
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString()
-    },
-    {
-      id: 'cli_hilder_001',
-      name: 'HILDER GABRIEL DE OLIVEIRA',
-      cnpj: '24.392.727/0001-20',
-      contact: 'FRANK',
-      email: '',
-      phone: '(41) 9509-5619',
-      type: ClientType.CONTRIBUTOR,
-      zipCode: '83410-360',
-      address: 'R GUARANIACU',
-      number: '89',
-      neighborhood: 'PALOMA',
-      city: 'COLOMBO',
-      state: 'PR',
-      active: true,
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString()
-    },
-    {
-      id: 'cli_benecke_001',
-      name: 'BENECKE',
-      cnpj: '86.375.656/0001-04',
-      contact: 'WILLIAM',
-      email: '',
-      phone: '(47) 93382-2222',
-      type: ClientType.CONTRIBUTOR,
-      zipCode: '89120-971',
-      address: 'RUA FRITZ LORENZ',
-      number: '2170',
-      neighborhood: 'CENTRO',
-      city: 'TIMBÓ',
-      state: 'SC',
-      active: true,
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString()
-    },
-    {
-      id: 'cli_icavi_001',
-      name: 'ICAVI - IND DE CALDEIRAS',
-      cnpj: '07.386.836/0001-15',
-      contact: 'MARCO',
-      email: '',
-      phone: '(47) 93545-8200',
-      type: ClientType.CONTRIBUTOR,
-      zipCode: '89173-000',
-      address: 'RODOVIA BR 470 KM 171',
-      number: 'SN',
-      neighborhood: 'DISTRITO DE ATERRADO',
-      city: 'POUSO REDONDO',
-      state: 'SC',
-      active: true,
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString()
-    },
-    {
-      id: 'cli_drytec_001',
-      name: 'DRYTEC LTDA',
-      cnpj: '63.721.181/0001-65',
-      contact: 'LIA',
-      email: '',
-      phone: '(47) 9760-2111',
-      type: ClientType.CONTRIBUTOR,
-      zipCode: '89030-000',
-      address: 'RUA CARLOS JENSEN',
-      number: '204',
-      neighborhood: 'ITOUPAVA SECA',
-      city: 'BLUMENAU',
-      state: 'SC',
-      active: true,
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString()
-    },
-    {
-      id: 'cli_amdecor_001',
-      name: 'AM DECOR',
-      cnpj: '27.582.943/0001-26',
-      contact: 'MARCELO',
-      email: '',
-      phone: '(54) 99973-0796',
-      type: ClientType.CONTRIBUTOR,
-      zipCode: '95000-000',
-      address: 'MUNICIPAL VALENTINO VENTURIN',
-      number: '920',
-      neighborhood: 'MONTE BERICO',
-      city: 'CAXIAS DO SUL',
-      state: 'RS',
-      active: true,
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString()
-    },
-    {
-      id: 'cli_jpisolamentos_001',
-      name: 'JP ISOLAMENTOS',
-      cnpj: '52.954.963/0001-28',
-      contact: 'ANDRÉ',
-      email: '',
-      phone: '(11) 2954-9767',
-      type: ClientType.CONTRIBUTOR,
-      zipCode: '06401-090',
-      address: 'ALAMEDA RIO PRETO',
-      number: '752',
-      neighborhood: 'TAMBORE',
-      city: 'BARUERI',
-      state: 'SP',
-      active: true,
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString()
     }
   ],
   CARRIERS: [
@@ -279,82 +150,6 @@ const SEED_DATA = {
       number: '173',
       neighborhood: 'CONRADINHO',
       city: 'GUARAPUAVA',
-      state: 'PR',
-      active: true,
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString()
-    },
-    {
-      id: 'car_rodonaves_001',
-      name: 'RTE RODONAVES',
-      cnpj: '44.914.992/0001-38',
-      contact: 'COMERCIAL',
-      email: 'cotacao@rodonaves.com.br',
-      phone: '(16) 2101-9999',
-      fleetType: 'Média / Trucks',
-      status: 'Ativo',
-      zipCode: '14075-260',
-      address: 'AVENIDA PRESIDENTE KENNEDY',
-      number: '2000',
-      neighborhood: 'RIBEIRANIA',
-      city: 'RIBEIRÃO PRETO',
-      state: 'SP',
-      active: true,
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString()
-    },
-    {
-      id: 'car_jrg_001',
-      name: 'JRG DE LARA TRANSPORTES',
-      cnpj: '54.865.166/0001-08',
-      contact: 'COMERCIAL',
-      email: '',
-      phone: '(41) 9 9545-2155',
-      fleetType: 'Geral',
-      status: 'Ativo',
-      zipCode: '81480-326',
-      address: 'RUA JANGUITO DO ROSÁRIO',
-      number: '50',
-      neighborhood: 'TATUQUARA',
-      city: 'CURITIBA',
-      state: 'PR',
-      active: true,
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString()
-    },
-    {
-      id: 'car_queritos_001',
-      name: 'QUERITOS TRANSPORTES',
-      cnpj: '23.815.722/0007-08',
-      contact: 'COMERCIAL',
-      email: '',
-      phone: '(41) 9 8894-3890',
-      fleetType: 'Geral',
-      status: 'Ativo',
-      zipCode: '83825-380',
-      address: 'RUA LUCINIR FRANCO DA ROCHA',
-      number: '241',
-      neighborhood: 'VENEZA',
-      city: 'FAZENDA RIO GRANDE',
-      state: 'PR',
-      active: true,
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString()
-    },
-    {
-      id: 'car_hf_001',
-      name: 'H.F SOLUÇÕES',
-      cnpj: '58.075.757/0001-24',
-      contact: 'COMERCIAL',
-      email: '',
-      phone: '(41) 9 9739-5155',
-      fleetType: 'Geral',
-      status: 'Ativo',
-      zipCode: '81540-250',
-      address: 'RUA NICOLAU COPÉRNICO',
-      number: '41',
-      neighborhood: 'JARDIM DAS AMÉRICAS',
-      city: 'CURITIBA',
       state: 'PR',
       active: true,
       createdAt: new Date().toISOString(),
@@ -404,16 +199,22 @@ class Table<T> {
     
     // Guard clause for SSR/Node environments
     if (typeof window !== 'undefined') {
-      if (!localStorage.getItem(this.key)) {
-        localStorage.setItem(this.key, JSON.stringify(initialData));
-      }
+      try {
+        if (!localStorage.getItem(this.key)) {
+          localStorage.setItem(this.key, JSON.stringify(initialData));
+        }
+      } catch {}
     }
   }
 
   getAll(): T[] {
     if (typeof window === 'undefined') return this.initialData;
-    const data = localStorage.getItem(this.key);
-    return data ? JSON.parse(data) : [];
+    try {
+      const data = localStorage.getItem(this.key);
+      return data ? JSON.parse(data) : [];
+    } catch {
+      return this.initialData;
+    }
   }
 
   getById(id: string): T | undefined {
@@ -422,64 +223,80 @@ class Table<T> {
 
   create(item: T): T {
     if (typeof window === 'undefined') return item;
-    const data = this.getAll();
-    const newItem = { ...item }; 
-    data.unshift(newItem as any);
-    this.save(data);
-    return newItem;
+    try {
+      const data = this.getAll();
+      const newItem = { ...item }; 
+      data.unshift(newItem as any);
+      this.save(data);
+      return newItem;
+    } catch {
+      return item;
+    }
   }
 
   update(id: string, updates: Partial<T>): T | null {
     if (typeof window === 'undefined') return null;
-    const data = this.getAll();
-    const index = data.findIndex((item: any) => item.id === id);
-    if (index === -1) return null;
-    
-    const updatedItem = { ...data[index], ...updates };
-    data[index] = updatedItem;
-    this.save(data);
-    return updatedItem;
+    try {
+      const data = this.getAll();
+      const index = data.findIndex((item: any) => item.id === id);
+      if (index === -1) return null;
+      
+      const updatedItem = { ...data[index], ...updates };
+      data[index] = updatedItem;
+      this.save(data);
+      return updatedItem;
+    } catch {
+      return null;
+    }
   }
 
   delete(id: string): void {
     if (typeof window === 'undefined') return;
-    const data = this.getAll();
-    const filtered = data.filter((item: any) => item.id !== id);
-    this.save(filtered);
+    try {
+      const data = this.getAll();
+      const filtered = data.filter((item: any) => item.id !== id);
+      this.save(filtered);
+    } catch {}
   }
 
   getSettings(): T {
     if (typeof window === 'undefined') return SEED_DATA.SETTINGS as unknown as T;
-    
-    const data = localStorage.getItem(this.key);
-    if (data) {
-        const parsed = JSON.parse(data);
-        
-        // --- MIGRAÇÃO V31: Garantir que novos campos existam ---
-        if (!parsed.webhookConfig) {
-            parsed.webhookConfig = SEED_DATA.SETTINGS.webhookConfig;
-        } else if (!parsed.webhookConfig.events) {
-            parsed.webhookConfig.events = [];
-            parsed.webhookConfig.filters = [];
+    try {
+        const data = localStorage.getItem(this.key);
+        if (data) {
+            const parsed = JSON.parse(data);
+            
+            if (!parsed.webhookConfig) {
+                parsed.webhookConfig = SEED_DATA.SETTINGS.webhookConfig;
+            } else if (!parsed.webhookConfig.events) {
+                parsed.webhookConfig.events = [];
+                parsed.webhookConfig.filters = [];
+            }
+            
+            if (!parsed.notificationTemplates) {
+                parsed.notificationTemplates = SEED_DATA.SETTINGS.notificationTemplates;
+            }
+            
+            return parsed;
         }
-        
-        if (!parsed.notificationTemplates) {
-            parsed.notificationTemplates = SEED_DATA.SETTINGS.notificationTemplates;
-        }
-        
-        return parsed;
+        return SEED_DATA.SETTINGS as unknown as T;
+    } catch {
+        return SEED_DATA.SETTINGS as unknown as T;
     }
-    return SEED_DATA.SETTINGS as unknown as T;
   }
 
   saveSettings(settings: T): void {
     if (typeof window === 'undefined') return;
-    localStorage.setItem(this.key, JSON.stringify(settings));
+    try {
+      localStorage.setItem(this.key, JSON.stringify(settings));
+    } catch {}
   }
 
   private save(data: T[]) {
     if (typeof window === 'undefined') return;
-    localStorage.setItem(this.key, JSON.stringify(data));
+    try {
+      localStorage.setItem(this.key, JSON.stringify(data));
+    } catch {}
   }
 }
 
@@ -498,8 +315,10 @@ export const db = {
   // Utilitário para limpar o banco (reset)
   resetDatabase: () => {
     if (typeof window !== 'undefined') {
-      localStorage.clear();
-      window.location.reload();
+      try {
+        localStorage.clear();
+        window.location.reload();
+      } catch {}
     }
   }
 };

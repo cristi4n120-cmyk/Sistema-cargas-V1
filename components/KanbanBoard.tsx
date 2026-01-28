@@ -1,7 +1,5 @@
-
 import React, { useState } from 'react';
-import * as ReactRouterDOM from 'react-router-dom';
-const { useNavigate } = ReactRouterDOM;
+import { useNavigate } from 'react-router-dom';
 import { 
   MapPin, 
   Truck,
@@ -34,7 +32,6 @@ const KanbanBoard: React.FC<KanbanBoardProps> = ({ loads, onUpdateStatus, onDele
   const isAdmin = currentUser.role === UserRole.ADMIN;
   const isViewer = currentUser.role === UserRole.VIEWER;
 
-  // Estados para controle visual do Drag and Drop
   const [draggingId, setDraggingId] = useState<string | null>(null);
   const [targetColumn, setTargetColumn] = useState<LoadStatus | null>(null);
 
@@ -46,13 +43,10 @@ const KanbanBoard: React.FC<KanbanBoardProps> = ({ loads, onUpdateStatus, onDele
     { title: 'Expedido', status: LoadStatus.DISPATCHED, color: STATUS_HEX[LoadStatus.DISPATCHED], progress: 100 },
   ];
 
-  // --- DRAG AND DROP HANDLERS ---
-
   const handleDragStart = (e: React.DragEvent, id: string) => {
     setDraggingId(id);
     e.dataTransfer.setData('loadId', id);
     e.dataTransfer.effectAllowed = 'move';
-    // Remove default ghost image to rely on our styled component (visual trickery required typically, here we minimize opacity)
     const el = e.currentTarget as HTMLElement;
     setTimeout(() => el.classList.add('opacity-40', 'scale-95', 'grayscale'), 0);
   };
@@ -72,7 +66,6 @@ const KanbanBoard: React.FC<KanbanBoardProps> = ({ loads, onUpdateStatus, onDele
   };
 
   const handleDragLeave = (e: React.DragEvent) => {
-    // Optional cleanup
   };
 
   const handleDrop = (e: React.DragEvent, newStatus: LoadStatus) => {
@@ -87,16 +80,6 @@ const KanbanBoard: React.FC<KanbanBoardProps> = ({ loads, onUpdateStatus, onDele
         onUpdateStatus(id, newStatus);
       }
     }
-  };
-
-  // --- ACTIONS ---
-
-  const handleMove = (e: React.MouseEvent, id: string, currentStatus: LoadStatus) => {
-    e.stopPropagation();
-    const statusOrder = [LoadStatus.TRANSIT, LoadStatus.ARRIVED, LoadStatus.IDENTIFIED, LoadStatus.BILLED, LoadStatus.DISPATCHED];
-    const currentIndex = statusOrder.indexOf(currentStatus);
-    const nextIndex = currentIndex + 1;
-    if (nextIndex < statusOrder.length) onUpdateStatus(id, statusOrder[nextIndex]);
   };
 
   const handleDelete = (e: React.MouseEvent, id: string) => {
@@ -133,12 +116,10 @@ const KanbanBoard: React.FC<KanbanBoardProps> = ({ loads, onUpdateStatus, onDele
             `} 
             style={{ animationDelay: `${idx * 150}ms` }}
           >
-            {/* COLUMN HEADER DOCK */}
             <div className={`
               relative flex items-center justify-between px-6 py-5 rounded-[2.5rem] border backdrop-blur-md shrink-0 transition-all duration-500 overflow-hidden
               ${isDragOver ? 'bg-white dark:bg-[#1e293b] border-brand-accent shadow-lg' : 'bg-white/80 dark:bg-[#1e293b]/80 border-slate-200 dark:border-white/5 group-hover/col:border-slate-300 dark:group-hover/col:border-white/10'}
             `}>
-              {/* Progress Line */}
               <div className="absolute bottom-0 left-0 h-1 bg-slate-100 dark:bg-white/5 w-full">
                  <div className="h-full bg-brand-accent transition-all duration-1000 ease-out" style={{ width: `${col.progress}%`, opacity: isDragOver ? 1 : 0.5 }}></div>
               </div>
@@ -155,10 +136,8 @@ const KanbanBoard: React.FC<KanbanBoardProps> = ({ loads, onUpdateStatus, onDele
               </span>
             </div>
 
-            {/* DROP ZONE (LANE) */}
             <div className="flex-1 rounded-[3rem] p-1 space-y-5 overflow-y-auto custom-scrollbar relative">
               
-              {/* Background Guide Lines */}
               <div className="absolute inset-0 flex flex-col justify-between opacity-[0.03] pointer-events-none p-6">
                  {[1,2,3,4,5].map(i => <div key={i} className="w-full h-px bg-current border-t border-dashed"></div>)}
               </div>
@@ -190,107 +169,85 @@ const KanbanBoard: React.FC<KanbanBoardProps> = ({ loads, onUpdateStatus, onDele
                     `}
                     style={{ animationDelay: `${lIdx * 80}ms` }}
                   >
-                    {/* Header: ID & Actions */}
                     <div className="flex justify-between items-start">
                        <div className="flex items-center gap-3">
-                          <div className={`p-2 rounded-xl transition-colors ${isFiscalAlert ? 'bg-amber-500 text-white animate-pulse' : 'bg-slate-100 dark:bg-white/5 text-slate-400 group-hover/card:bg-brand-navy dark:group-hover/card:bg-white group-hover/card:text-white dark:group-hover/card:text-brand-navy'}`}>
-                             {isFiscalAlert ? <AlertTriangle size={14} /> : <GripVertical size={14} />}
+                          <div className={`p-2 rounded-xl transition-colors ${isFiscalAlert ? 'bg-amber-500 text-white animate-pulse' : 'bg-slate-100 dark:bg-white/5 text-slate-400 group-hover:bg-brand-navy group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-brand-navy'}`}>
+                             {isFiscalAlert ? <AlertTriangle size={16} /> : <Package size={16} />}
                           </div>
-                          <div>
-                             <span className="font-data text-[10px] font-black uppercase tracking-tight text-brand-navy dark:text-white block">
-                               {load.portCode}
-                             </span>
-                             <span className="text-[8px] font-bold text-slate-400 uppercase tracking-widest">
-                               {new Date(load.date).toLocaleDateString(undefined, {day: '2-digit', month: 'short'})}
-                             </span>
-                          </div>
+                          <span className="text-[10px] font-black font-data text-brand-navy dark:text-white uppercase tracking-tight">
+                             {load.portCode}
+                          </span>
                        </div>
                        
-                       <div className="opacity-0 group-hover/card:opacity-100 transition-opacity flex gap-1">
-                          <button onClick={(e) => { e.stopPropagation(); loadService.downloadManifest(load); }} className="p-2 hover:bg-slate-100 dark:hover:bg-white/10 rounded-lg text-slate-400 hover:text-brand-navy dark:hover:text-white transition-colors"><Printer size={14} /></button>
-                          {!isViewer && (isAdmin || load.status === LoadStatus.TRANSIT) && (
-                             <button onClick={(e) => handleDelete(e, load.id)} className="p-2 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg text-slate-400 hover:text-red-500 transition-colors"><Trash2 size={14} /></button>
-                          )}
+                       <div className="relative group/menu">
+                          <button className="p-1 text-slate-300 hover:text-brand-navy dark:hover:text-white transition-colors">
+                             <MoreHorizontal size={16} />
+                          </button>
+                          
+                          <div className="absolute right-0 top-full mt-2 bg-white dark:bg-[#020617] border border-slate-100 dark:border-white/10 rounded-xl shadow-xl p-1 z-50 opacity-0 group-hover/menu:opacity-100 pointer-events-none group-hover/menu:pointer-events-auto transition-all w-32 flex flex-col gap-1">
+                             {!isViewer && (
+                               <button onClick={(e) => handleDelete(e, load.id)} className="flex items-center gap-2 px-3 py-2 hover:bg-red-50 dark:hover:bg-red-900/20 text-red-500 rounded-lg text-[9px] font-bold uppercase w-full text-left">
+                                  <Trash2 size={12} /> Excluir
+                               </button>
+                             )}
+                             <button onClick={(e) => { e.stopPropagation(); loadService.downloadManifest(load); }} className="flex items-center gap-2 px-3 py-2 hover:bg-slate-50 dark:hover:bg-white/10 text-slate-500 dark:text-slate-300 rounded-lg text-[9px] font-bold uppercase w-full text-left">
+                                <Printer size={12} /> Imprimir
+                             </button>
+                          </div>
                        </div>
                     </div>
 
-                    {/* Main Info */}
-                    <div className="space-y-2">
-                       <div className="flex items-center gap-2">
-                          {isMultiDelivery && <Layers size={12} className="text-indigo-500" />}
-                          <h4 className="text-xs font-black text-brand-navy dark:text-white uppercase leading-snug line-clamp-2">
+                    <div className="space-y-3">
+                       <div>
+                          <h4 className="text-xs font-black uppercase tracking-tight text-slate-700 dark:text-slate-200 line-clamp-2 leading-tight group-hover/card:text-brand-accent transition-colors" title={load.client}>
                              {load.client}
                           </h4>
-                       </div>
-                       
-                       <div className="flex flex-col gap-1.5 pl-1 border-l-2 border-slate-100 dark:border-white/5">
-                          <div className="flex items-center gap-2 text-[9px] font-bold text-slate-500 dark:text-slate-400 uppercase">
-                             <MapPin size={10} className="text-brand-accent shrink-0" />
-                             <span className="truncate">{load.destinationCity} / {load.destinationUF}</span>
+                          <div className="flex items-center gap-1.5 mt-1 text-[9px] font-bold text-slate-400 uppercase">
+                             <MapPin size={10} className="text-brand-accent" />
+                             <span className="truncate">{load.destinationCity}</span>
+                             <span>/</span>
+                             <span>{load.destinationUF}</span>
                           </div>
-                          <div className="flex items-center gap-2 text-[9px] font-bold text-slate-500 dark:text-slate-400 uppercase">
-                             <Truck size={10} className="shrink-0" />
-                             <span className="truncate">{load.carrier || 'Própria'}</span>
+                       </div>
+
+                       <div className="flex items-center justify-between pt-3 border-t border-slate-100 dark:border-white/5">
+                          <div className="flex items-center gap-1.5 bg-slate-50 dark:bg-white/5 px-2 py-1 rounded-lg">
+                             <Truck size={10} className="text-slate-400" />
+                             <span className="text-[9px] font-bold text-brand-navy dark:text-white uppercase truncate max-w-[80px]">
+                                {load.carrier || 'Própria'}
+                             </span>
+                          </div>
+                          
+                          <div className="text-right">
+                             <span className="text-[8px] font-bold text-slate-400 block uppercase">Valor Frete</span>
+                             <span className="text-[10px] font-black font-data text-brand-navy dark:text-white">
+                                {formatCurrency(load.freightValue)}
+                             </span>
                           </div>
                        </div>
                     </div>
 
-                    {/* Footer Stats & Actions */}
-                    <div className="pt-4 mt-2 border-t border-slate-50 dark:border-white/5 flex items-center justify-between">
-                       <div className="bg-slate-50 dark:bg-white/5 px-3 py-1.5 rounded-lg border border-slate-100 dark:border-white/5">
-                          <span className="text-[10px] font-black text-emerald-600 dark:text-emerald-400 font-data">
-                             {formatCurrency(load.freightValue)}
-                          </span>
+                    {isMultiDelivery && (
+                       <div className="absolute top-0 right-0 -mt-1 -mr-1">
+                          <div className="w-6 h-6 bg-brand-navy text-white rounded-full flex items-center justify-center text-[9px] font-black border-2 border-white dark:border-[#1e293b]" title="Múltiplas Entregas">
+                             <Layers size={12} />
+                          </div>
                        </div>
-
-                       {col.status === LoadStatus.DISPATCHED ? (
-                          <button
-                            type="button"
-                            onClick={(e) => handleFinishDelivery(e, load.id)}
-                            className="flex items-center gap-2 pl-3 pr-4 py-1.5 rounded-xl bg-emerald-500 text-white text-[9px] font-black uppercase tracking-widest hover:bg-emerald-600 hover:scale-105 shadow-lg shadow-emerald-500/30 transition-all"
-                          >
-                             <CheckCircle size={12} /> Concluir
-                          </button>
-                       ) : (
-                          <button 
-                            type="button"
-                            onClick={(e) => handleMove(e, load.id, load.status)}
-                            className="w-8 h-8 flex items-center justify-center rounded-xl bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-400 hover:text-brand-navy dark:hover:text-white hover:border-brand-navy dark:hover:border-white transition-all hover:rotate-90"
-                          >
-                             <ArrowRight size={14} />
-                          </button>
-                       )}
-                    </div>
-
-                    {/* Fiscal Alert Overlay Texture */}
-                    {isFiscalAlert && (
-                       <div className="absolute top-0 right-0 p-2">
-                          <span className="flex h-2 w-2">
-                            <span className="animate-ping absolute inline-flex h-2 w-2 rounded-full bg-amber-400 opacity-75"></span>
-                            <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
-                          </span>
-                       </div>
+                    )}
+                    
+                    {load.status === LoadStatus.DISPATCHED && (
+                        <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 opacity-0 group-hover/card:opacity-100 transition-all duration-300 translate-y-2 group-hover/card:translate-y-0">
+                           <button 
+                             onClick={(e) => handleFinishDelivery(e, load.id)}
+                             className="flex items-center gap-2 bg-emerald-500 text-white px-4 py-2 rounded-xl text-[9px] font-black uppercase tracking-widest shadow-lg hover:bg-emerald-600 transition-colors"
+                           >
+                              <CheckCircle size={12} /> Concluir
+                           </button>
+                        </div>
                     )}
                   </div>
                 );
               })}
-              
-              {columnLoads.length === 0 && (
-                <div className={`
-                  h-64 flex flex-col items-center justify-center rounded-[3rem] border-4 border-dashed transition-all duration-500
-                  ${isDragOver 
-                    ? 'border-brand-accent/50 bg-brand-accent/5 scale-105 opacity-100' 
-                    : 'border-slate-200 dark:border-white/5 opacity-40 hover:opacity-60'
-                  }
-                `}>
-                   <div className={`w-16 h-16 rounded-full bg-slate-100 dark:bg-white/5 flex items-center justify-center mb-4 transition-transform ${isDragOver ? 'scale-125 animate-bounce text-brand-accent' : 'text-slate-400'}`}>
-                      <Package size={24} />
-                   </div>
-                   <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.3em]">
-                      {isDragOver ? 'Soltar Carga' : 'Vazio'}
-                   </p>
-                </div>
-              )}
             </div>
           </div>
         );

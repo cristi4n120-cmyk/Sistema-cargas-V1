@@ -22,7 +22,6 @@ type TabType = 'overview' | 'financeiro' | 'transportadoras';
 
 // --- HOOKS DE ANIMAÇÃO ---
 
-// Hook para animar números (CountUp)
 const useCountUp = (end: number, duration = 1500, start = 0) => {
   const [count, setCount] = useState(start);
   
@@ -31,15 +30,9 @@ const useCountUp = (end: number, duration = 1500, start = 0) => {
     const animate = (currentTime: number) => {
       if (!startTime) startTime = currentTime;
       const progress = Math.min((currentTime - startTime) / duration, 1);
-      
-      // Easing function: EaseOutQuart
       const ease = 1 - Math.pow(1 - progress, 4);
-      
       setCount(start + (end - start) * ease);
-      
-      if (progress < 1) {
-        requestAnimationFrame(animate);
-      }
+      if (progress < 1) requestAnimationFrame(animate);
     };
     requestAnimationFrame(animate);
   }, [end, duration, start]);
@@ -47,7 +40,6 @@ const useCountUp = (end: number, duration = 1500, start = 0) => {
   return count;
 };
 
-// Hook para tema
 const useThemeColors = () => {
   const [isDark, setIsDark] = useState(settingsService.getSettings().darkMode);
 
@@ -68,8 +60,6 @@ const useThemeColors = () => {
   };
 };
 
-// --- COMPONENTES VISUAIS ---
-
 const AnimatedValue = ({ value, formatter = (v: number) => v.toString(), className }: { value: number, formatter?: (v: number) => string, className?: string }) => {
   const count = useCountUp(value);
   return <span className={className}>{formatter(count)}</span>;
@@ -81,7 +71,6 @@ const StatCard = ({ title, value, subtext, icon: Icon, trend, trendLabel, color 
   const isNavy = color === 'navy';
   const isWhite = color === 'white';
   
-  // Extrai número para animação se for possível
   const numValue = typeof value === 'string' ? parseFloat(value.replace(/[^0-9.-]+/g,"")) : value;
   const isCurrency = typeof value === 'string' && value.includes('R$');
   const isPercent = typeof value === 'string' && value.includes('%');
@@ -99,10 +88,7 @@ const StatCard = ({ title, value, subtext, icon: Icon, trend, trendLabel, color 
       `}
       style={{ animationDelay: `${delay}ms` }}
     >
-      {/* Background Ambient Glow */}
       <div className={`absolute -right-10 -top-10 w-40 h-40 rounded-full blur-[60px] opacity-20 transition-transform duration-1000 group-hover:scale-150 group-hover:opacity-40 ${isRed ? 'bg-rose-500' : (isGreen ? 'bg-emerald-500' : 'bg-brand-accent')}`}></div>
-      
-      {/* Decorative Tech Lines */}
       <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-current to-transparent opacity-10"></div>
 
       <div className="relative z-10 flex justify-between items-start mb-4">
@@ -119,7 +105,6 @@ const StatCard = ({ title, value, subtext, icon: Icon, trend, trendLabel, color 
       
       <div className="relative z-10">
         <h3 className={`text-3xl font-black font-data tracking-tighter mb-1 truncate ${isNavy ? 'text-white' : 'text-brand-navy dark:text-white'}`}>
-           {/* Se for número extraível, anima. Se não, mostra estático */}
            {!isNaN(numValue) ? (
              <AnimatedValue 
                value={numValue} 
@@ -177,10 +162,9 @@ const Dashboard: React.FC = () => {
   const [timeFilter, setTimeFilter] = useState<TimeRange>('month');
   const [isLoading, setIsLoading] = useState(true);
   
-  // Simulando loading para transições de "troca de contexto"
   useEffect(() => {
     setIsLoading(true);
-    const timer = setTimeout(() => setIsLoading(false), 400); // Rápido para não travar
+    const timer = setTimeout(() => setIsLoading(false), 400); 
     return () => clearTimeout(timer);
   }, [activeTab, timeFilter]);
 
@@ -349,7 +333,6 @@ const Dashboard: React.FC = () => {
           `}
           style={{ animationDelay: `${idx * 100}ms` }}
         >
-          {/* Active Background Animation */}
           {activeTab === tab.id && (
              <div className="absolute inset-0 bg-gradient-to-r from-brand-navy to-brand-navy-light dark:from-brand-accent dark:to-purple-600 rounded-[1.8rem] animate-slide-up-fade -z-10"></div>
           )}
@@ -362,7 +345,6 @@ const Dashboard: React.FC = () => {
   );
 
   const renderContent = () => {
-    // SKELETON LOADING
     if (isLoading) {
       return (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 animate-pulse">
@@ -378,7 +360,6 @@ const Dashboard: React.FC = () => {
       case 'overview':
         return (
           <div className="space-y-8 animate-enter">
-            {/* KPI ROW */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               <StatCard title="Receita Bruta" value={kpis.totalRevenue} icon={DollarSign} color="navy" subtext="Faturamento de Fretes" delay={0} />
               <StatCard title="Custo Logístico" value={kpis.totalCost} icon={Coins} color="white" subtext="Pago a Parceiros" delay={100} />
@@ -387,9 +368,7 @@ const Dashboard: React.FC = () => {
             </div>
             
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-              {/* STATUS PIPELINE */}
               <div className="lg:col-span-2 glass-panel p-8 lg:p-10 rounded-[3rem] shadow-premium animate-enter stagger-4 relative overflow-hidden">
-                {/* Decorative Grid */}
                 <div className="absolute inset-0 bg-grid-pattern opacity-[0.03] pointer-events-none"></div>
                 
                 <div className="flex items-center justify-between mb-8 relative z-10">
@@ -431,7 +410,6 @@ const Dashboard: React.FC = () => {
                 </div>
               </div>
               
-              {/* RISK RADAR */}
               <div className="glass-panel p-8 lg:p-10 rounded-[3rem] shadow-premium relative overflow-hidden group animate-enter stagger-5 flex flex-col">
                 <div className="absolute top-0 right-0 w-64 h-64 bg-brand-accent/5 dark:bg-brand-accent/20 rounded-full blur-3xl -mr-32 -mt-32 group-hover:scale-150 transition-transform duration-[2000ms]"></div>
                 

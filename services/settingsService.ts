@@ -19,8 +19,10 @@ export const settingsService = {
 
   resetToDefault: () => {
     if (typeof window !== 'undefined') {
-      localStorage.removeItem('gesla_db_settings');
-      window.location.reload();
+      try {
+        localStorage.removeItem('gesla_db_settings');
+        window.location.reload();
+      } catch {}
     }
     return db.settings.getSettings();
   }

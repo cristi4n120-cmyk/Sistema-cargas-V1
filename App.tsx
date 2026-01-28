@@ -1,7 +1,5 @@
-
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import * as ReactRouterDOM from 'react-router-dom';
-const { HashRouter: Router, Routes, Route, Navigate } = ReactRouterDOM;
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
 import TopBar from './components/TopBar';
 import Dashboard from './components/Dashboard';
